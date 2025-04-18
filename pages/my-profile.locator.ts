@@ -122,4 +122,16 @@ export class myProfileLocator{
     get noDataWeblinkError(){
         return this.page.getByText('No data available, please').first();
     }
+    get mediaCardDropdownPrompt(){
+        return `//ul[contains(@class,'FormFields_options__iEtje')]/li`;
+    }
+    get mediaCardModal(){
+        return this.page.getByText('Add media cardShare your');
+    }
+    get mediaCardPromptContainer(){
+        return this.page.getByRole('button', { name: 'Vizzy prompt' });
+    }
+    get mediaCardHeadline(){
+        return this.page.getByRole('textbox', { name: 'Headline' });
+    }
 };

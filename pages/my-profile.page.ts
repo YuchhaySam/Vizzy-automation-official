@@ -6,8 +6,10 @@ import { DataForNormalCard } from "../test-data/types";
 
 let caresouselCount = 0;
 export class MyProfilePage{
+    
     constructor(private page: Page,
-        private locator= new myProfileLocator(page)){}
+        private locator= new myProfileLocator(page)){
+        }
     
     async verifyMyProfileTitle(): Promise<this>{
         const title = "Profile | Vizzy";
@@ -124,11 +126,9 @@ export class MyProfilePage{
         await this.locator.addCardDescription.fill(description);
         return this;
     }
-    
     async uploadFileAndWait(page: Page, filePath: string, requestURL: string, mediaType: string): Promise<void> {
         // Trigger the file upload first
         const uploadPromise = this.locator.addMediaInputField.setInputFiles( filePath);
-        console.log(requestURL)
         // Wait for the specific upload API response after triggering the upload
         const uploadResponse = await page.waitForResponse((response: Response) => {
             const isUploadUrl = response.url().includes(requestURL); // your upload API URL
@@ -140,60 +140,60 @@ export class MyProfilePage{
         await uploadPromise;
         caresouselCount++;
       }
-    async uploadMedia(errors: string[], mediaFile: string) {
+    async uploadMedia(errors: string[], mediaFile: string[]) {
+        caresouselCount = 0; //reset the number 
         let mediaArray: DataForNormalCard[] = [];
         const testData = DataManager.getInstance().getDataForNormalCard();
-    
-        for (const media of testData) {
-            if (media.file === mediaFile) {
-                mediaArray.push(media);
-            }
-        }
-        console.log(mediaArray)
-        for (const media of mediaArray) { 
-            if (media.file === 'document' || media.file === 'audio' || media.file === 'gif') {
-                try {
-                    const filePath = path.join(__dirname, media.path);
-                    await this.uploadFileAndWait(
-                        this.page, filePath, media.requestURL, media.type);
-                    await expect(this.locator.fileNotSupportedError).not.toBeVisible();
-                    
-                }catch(error){
-                    errors.push('file is not supported');
+        for(const file of mediaFile){
+            for (const media of testData) {
+                if (media.file === file) {
+                    mediaArray.push(media);
                 }
-            }  else if (media.file === 'webLink') {
-                    try{
-                        await this.locator.addWebLinkInputField.fill(media.path);
-                        await this.locator.addWebLinkButton.click();
-                        await expect(this.locator.noDataWeblinkError).not.toBeVisible({ timeout: 5000 });
-                        await expect(this.locator.addWebLinkButton).toBeDisabled(
-                            {timeout:10000}
-                        );
+            }
+            for (const media of mediaArray) { 
+                if (media.file === 'document' || media.file === 'audio' || media.file === 'gif') {
+                    try {
+                        const filePath = path.join(__dirname, media.path);
+                        await this.uploadFileAndWait(
+                            this.page, filePath, media.requestURL, media.type);
+                        await expect(this.locator.fileNotSupportedError).not.toBeVisible();
+                        
+                    }catch(error){
+                        errors.push('file is not supported');
+                    }
+                }  else if (media.file === 'webLink') {
+                        try{
+                            await this.locator.addWebLinkInputField.fill(media.path);
+                            await this.locator.addWebLinkButton.click();
+                            await expect(this.locator.noDataWeblinkError).not.toBeVisible({ timeout: 5000 });
+                            await expect(this.locator.addWebLinkButton).toBeDisabled(
+                                { timeout: 5000 }
+                            );
+                            caresouselCount++;
+                        }catch(error){
+                            errors.push('weblink not found')
+                        }   
+                } else {
+                    try {
+                        const filePath = path.join(__dirname, media.path);
+                        await this.locator.addMediaInputField.setInputFiles(filePath);
+                        await expect(this.locator.fileNotSupportedError).not.toBeVisible();
                         caresouselCount++;
                     }catch(error){
-                        errors.push('weblink not found')
-                    }   
-            } else {
-                try {
-                    const filePath = path.join(__dirname, media.path);
-                    await this.locator.addMediaInputField.setInputFiles(filePath);
-                    await expect(this.locator.fileNotSupportedError).not.toBeVisible();
-                    
-                }catch(error){
-                    errors.push('file is not supported');
-                }
-            }
-                if (media.haveConfirmationModal) {
-                    try{
-                        await this.locator.confirmationSaveButton.click();
-                    }catch(error){
-                        errors.push('no confirmation modal')
+                        errors.push('file is not supported');
                     }
-                }      
+                }
+                    if (media.haveConfirmationModal) {
+                        try{
+                            await this.locator.confirmationSaveButton.click();
+                        }catch(error){
+                            errors.push('no confirmation modal')
+                        }
+                    }      
+            }
         }
+        
         const carousel = await this.page.locator(this.locator.carouselContainer).all();
-        console.log(carousel)
-        console.log(carousel.length)
         expect.soft(carousel.length).toEqual(caresouselCount);
         return this;
     }
@@ -203,6 +203,36 @@ export class MyProfilePage{
             {timeout: 10000}
         );
         return this;
+    }
+    async addMediaCard(){
+        await this.locator.addContentButton.click();
+        await this.locator.addMediaButton.click();
+        await expect(this.locator.mediaCardModal).toBeVisible();
+        return this;
+    }
+    async selectVizzyPrompt(prompt: string){
+        await this.locator.mediaCardPromptContainer.click();
+        const promptDropdownlist = await this.page.locator(this.locator.mediaCardDropdownPrompt).all();
+        for(const dropdown of promptDropdownlist){
+            const text = await dropdown.innerText();
+            if(text === prompt){
+                await dropdown.click();
+            }
+        }
+        const selectedPrompt = await this.locator.mediaCardPromptContainer.textContent();
+        console.log(selectedPrompt);
+        expect(selectedPrompt).toContain(prompt);
+        return this;
+    }
+    async addMediaCardHeadline(headline:string){
+        await this.locator.mediaCardHeadline.fill(headline);
+        return this;
+    }
+    async saveMediaCard(){
+        await this.locator.saveButton.click();
+        await expect(this.locator.mediaCardModal).not.toBeVisible(
+            {timeout:10000}
+        );
     }
 };
 

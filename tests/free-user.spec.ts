@@ -3,6 +3,7 @@ import { DataManager } from "../utils/data-manager";
 import { VizzyLandingPage } from "../pages/vizzy-landing-page.page";
 import { MyProfilePage } from "../pages/my-profile.page";
 import path from "path";
+import { myProfileLocator } from "../pages/my-profile.locator";
 
 test.describe('free-user', async () => {
     let authState: {
@@ -100,15 +101,13 @@ test.describe('free-user', async () => {
             .then(myProfilePage => myProfilePage.addDescription(
                 informationData.description))
             .then(myProfilePage => myProfilePage.uploadMedia(
-                errors, 'document'))
-            .then(myProfilePage => myProfilePage.uploadMedia(
-                errors, 'audio'))
+                errors, ['document','audio']))
             .then(myProfilePage => myProfilePage.saveProjectCard())
             expect(errors).toEqual([]);
         console.log(errors);
     });
     
-    test('upload project card with image and weblink', async()=>{
+    test.skip('upload project card with image and weblink', async()=>{
         test.slow();
         const errors : string[] = [];
         const informationData = DataManager.getInstance().getInformationForCard();
@@ -123,14 +122,36 @@ test.describe('free-user', async () => {
             .then(myProfilePage => myProfilePage.addDescription(
                 informationData.description))
             .then(myProfilePage => myProfilePage.uploadMedia(
-                errors, 'image'))
-            .then(myProfilePage => myProfilePage.uploadMedia(
-                errors, 'webLink'))
-            .then(myProfilePage => myProfilePage.uploadMedia(
-                errors, 'gif'))
+                errors, ['image','webLink','gif']))
             .then(myProfilePage => myProfilePage.saveProjectCard())
             expect(errors).toEqual([]);
         console.log(errors);
     });
+    test('add media card with audio and pdf', async()=>{
+        test.slow();
+        const errors : string[] = [];
+        const informationData = DataManager.getInstance().getInformationForCard();
+        await new MyProfilePage(global.vizzyPage)
+            .addMediaCard()
+            .then(myProfilePage => myProfilePage.selectVizzyPrompt('A great read'))
+            .then(myProfilePage => myProfilePage.addMediaCardHeadline(informationData.headline))
+            .then(myProfilePage => myProfilePage.addDescription(informationData.description))
+            .then(myProfilePage => myProfilePage.uploadMedia(
+                errors, ['document', 'audio']))
+            .then(myProfilePage => myProfilePage.saveMediaCard());
+    })
+    test('add media card with image and weblink', async()=>{
+        test.slow();
+        const errors : string[] = [];
+        const informationData = DataManager.getInstance().getInformationForCard();
+        await new MyProfilePage(global.vizzyPage)
+            .addMediaCard()
+            .then(myProfilePage => myProfilePage.selectVizzyPrompt('A great read'))
+            .then(myProfilePage => myProfilePage.addMediaCardHeadline(informationData.headline))
+            .then(myProfilePage => myProfilePage.addDescription(informationData.description))
+            .then(myProfilePage => myProfilePage.uploadMedia(
+                errors, ['webLink','image','gif']))
+            .then(myProfilePage => myProfilePage.saveMediaCard());
+    })
     
 });

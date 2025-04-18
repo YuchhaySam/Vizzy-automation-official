@@ -1,4 +1,4 @@
-import { TestData, User } from "./types";
+import { TestData} from "./types";
 
 export const testData: TestData = {
     user: {
@@ -20,21 +20,21 @@ export const testData: TestData = {
             type : 'jpeg',
             path : '../test-data/media/image/0.jpg',
             haveConfirmationModal: true,
-            requestURL: 'data:image/jpeg;base64'
+            requestURL: 'null'
         },
         {
             file : 'image' ,
             type : 'png',
             path : '../test-data/media/image/1.png',
             haveConfirmationModal: true,
-            requestURL: 'data:image/png;base64'
+            requestURL: 'null'
         },
         {
             file: 'gif',
             type: 'gif',
             path: '../test-data/media/image/2.gif',
             haveConfirmationModal: false,
-            requestURL: 'data:image/gif;base64'
+            requestURL: 'null'
         },
         {
             file: 'document',
