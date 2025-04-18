@@ -1,9 +1,10 @@
-import test, { expect, Page } from "@playwright/test";
+import { Response , expect, Page, Locator } from "@playwright/test";
 import { myProfileLocator } from "./my-profile.locator";
 import path from "path";
 import { DataManager } from "../utils/data-manager";
+import { DataForNormalCard } from "../test-data/types";
 
-
+let caresouselCount = 0;
 export class MyProfilePage{
     constructor(private page: Page,
         private locator= new myProfileLocator(page)){}
@@ -103,6 +104,7 @@ export class MyProfilePage{
     async addProjectCard(){
         await this.locator.addContentButton.click();
         await this.locator.addProjectButton.click();
+        await this.locator.projectModal.waitFor({state:'visible'});
         await expect(this.locator.projectModal).toBeVisible();
         return this;
     }
@@ -122,51 +124,77 @@ export class MyProfilePage{
         await this.locator.addCardDescription.fill(description);
         return this;
     }
-    async uploadMedia(errors: string[], mediaFile: string){
-        let caresouselCount = 0;
+    
+    async uploadFileAndWait(page: Page, filePath: string, requestURL: string, mediaType: string): Promise<void> {
+        // Trigger the file upload first
+        const uploadPromise = this.locator.addMediaInputField.setInputFiles( filePath);
+        console.log(requestURL)
+        // Wait for the specific upload API response after triggering the upload
+        const uploadResponse = await page.waitForResponse((response: Response) => {
+            const isUploadUrl = response.url().includes(requestURL); // your upload API URL
+            const isPostMethod = response.request().method() === 'POST'; // ensure it's a POST request
+            return isUploadUrl && isPostMethod;         
+        });
+        await page.waitForTimeout(1000);
+        // Wait for the file upload to finish (the upload request triggered)
+        await uploadPromise;
+        caresouselCount++;
+      }
+    async uploadMedia(errors: string[], mediaFile: string) {
+        let mediaArray: DataForNormalCard[] = [];
         const testData = DataManager.getInstance().getDataForNormalCard();
-        for(const media of testData){
-            if(media.file === mediaFile){
-                if(media.type !== 'youtube-video' && media.type !== 'vimeo-video' && media.type !== 'normal-weblink'){
+    
+        for (const media of testData) {
+            if (media.file === mediaFile) {
+                mediaArray.push(media);
+            }
+        }
+        console.log(mediaArray)
+        for (const media of mediaArray) { 
+            if (media.file === 'document' || media.file === 'audio' || media.file === 'gif') {
+                try {
+                    const filePath = path.join(__dirname, media.path);
+                    await this.uploadFileAndWait(
+                        this.page, filePath, media.requestURL, media.type);
+                    await expect(this.locator.fileNotSupportedError).not.toBeVisible();
                     
-                    try{
-                        const filePath = path.join(__dirname, media.path);
-                        await this.locator.addMediaInputField.setInputFiles(filePath);
-                        await expect(this.locator.fileNotSupportedError)
-                            .not.toBeVisible();
-                        caresouselCount++;
-                    }catch(error){
-                        errors.push('File not supported');
-                    }
-                }else{
+                }catch(error){
+                    errors.push('file is not supported');
+                }
+            }  else if (media.file === 'webLink') {
                     try{
                         await this.locator.addWebLinkInputField.fill(media.path);
                         await this.locator.addWebLinkButton.click();
-                        await expect(this.locator.noDataWeblinkError)
-                            .not.toBeVisible({timeout: 5000});
+                        await expect(this.locator.noDataWeblinkError).not.toBeVisible({ timeout: 5000 });
+                        await expect(this.locator.addWebLinkButton).toBeDisabled(
+                            {timeout:10000}
+                        );
                         caresouselCount++;
-                    }catch(error){  
-                        errors.push('No weblink found');
-                    }
-                }
-            } 
-            if(media.haveConfirmationModal === true){
-                try{
-                    await this.locator.confirmationSaveButton.click();
+                    }catch(error){
+                        errors.push('weblink not found')
+                    }   
+            } else {
+                try {
+                    const filePath = path.join(__dirname, media.path);
+                    await this.locator.addMediaInputField.setInputFiles(filePath);
+                    await expect(this.locator.fileNotSupportedError).not.toBeVisible();
+                    
                 }catch(error){
-                    errors.push('confirmation modal did not appear');
+                    errors.push('file is not supported');
                 }
-            }else{
-                continue;
             }
+                if (media.haveConfirmationModal) {
+                    try{
+                        await this.locator.confirmationSaveButton.click();
+                    }catch(error){
+                        errors.push('no confirmation modal')
+                    }
+                }      
         }
         const carousel = await this.page.locator(this.locator.carouselContainer).all();
-        try{
-            expect(carousel.length).toEqual(caresouselCount);
-        } catch(error){
-            errors.push('Careosuel number does not match');
-        }
-        
+        console.log(carousel)
+        console.log(carousel.length)
+        expect.soft(carousel.length).toEqual(caresouselCount);
         return this;
     }
     async saveProjectCard(){
@@ -177,3 +205,4 @@ export class MyProfilePage{
         return this;
     }
 };
+

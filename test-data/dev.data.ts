@@ -17,75 +17,87 @@ export const testData: TestData = {
     dataForNormalCard :[
         {
             file : 'image' ,
-            type : 'jpg',
+            type : 'jpeg',
             path : '../test-data/media/image/0.jpg',
-            haveConfirmationModal: true
+            haveConfirmationModal: true,
+            requestURL: 'data:image/jpeg;base64'
         },
         {
             file : 'image' ,
             type : 'png',
             path : '../test-data/media/image/1.png',
-            haveConfirmationModal: true
+            haveConfirmationModal: true,
+            requestURL: 'data:image/png;base64'
         },
         {
             file: 'gif',
             type: 'gif',
             path: '../test-data/media/image/2.gif',
-            haveConfirmationModal: false
+            haveConfirmationModal: false,
+            requestURL: 'data:image/gif;base64'
         },
         {
             file: 'document',
             type: 'pdf',
             path: '../test-data/media/pdf/0.pdf',
-            haveConfirmationModal: false
+            haveConfirmationModal: false,
+            requestURL: 'v1_1/thinking-sky-blue-limited/image/upload'
         },
         {
             file: 'audio',
             type: 'mp3',
             path: '../test-data/media/audio/0.mp3',
-            haveConfirmationModal: false
+            haveConfirmationModal: false,
+            requestURL: 'v1_1/thinking-sky-blue-limited/video/upload'
         },
         {
             file: 'audio',
             type: 'wav',
             path: '../test-data/media/audio/1.wav',
-            haveConfirmationModal: false
+            haveConfirmationModal: false,
+            requestURL: 'v1_1/thinking-sky-blue-limited/video/upload'
         },
         {
             file: 'audio',
             type: 'ogg',
             path: '../test-data/media/audio/2.ogg',
-            haveConfirmationModal: false
+            haveConfirmationModal: false,
+            requestURL: 'v1_1/thinking-sky-blue-limited/video/upload'
         },
         {
             file: 'audio',
             type: 'm4a',
             path: '../test-data/media/audio/3.m4a',
-            haveConfirmationModal: false
+            haveConfirmationModal: false,
+            requestURL: 'v1_1/thinking-sky-blue-limited/video/upload'
         },
         {
             file: 'audio',
             type: 'wav',
             path: '../test-data/media/audio/4.flac',
-            haveConfirmationModal: false
+            haveConfirmationModal: false,
+            requestURL: 'v1_1/thinking-sky-blue-limited/video/upload'
         },
         {
             file: 'webLink',
             type: 'youtube-video',
             path: 'https://www.youtube.com/watch?v=NTpbbQUBbuo',
-            haveConfirmationModal: false
+            haveConfirmationModal: false,
+            requestURL: 'null'
         },
         {
             file: 'webLink',
             type: 'vimeo-video',
             path: 'https://vimeo.com/1073443416',
-            haveConfirmationModal: false
+            haveConfirmationModal: false,
+            requestURL: 'null'
         },
         {
             file: 'webLink',
             type: 'normal-weblink',
             path: 'https://www.nytimes.com/international/',
-            haveConfirmationModal: false
+            haveConfirmationModal: false,
+            requestURL: 'null'
         },
     ],
     informationForCard:{

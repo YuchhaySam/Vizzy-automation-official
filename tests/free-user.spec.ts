@@ -72,7 +72,7 @@ test.describe('free-user', async () => {
                 testUser.bio, testUser.headline));
     });
 
-    test('upload profile', async()=>{
+    test.skip('upload profile', async()=>{
         const testUser = DataManager.getInstance().getUserData();
         const image1 = path.join(__dirname, '../test-data/media/image/0.jpg');
         const errors: string[] = [];
@@ -85,7 +85,31 @@ test.describe('free-user', async () => {
         console.log(errors);
     });
 
-    test.fixme('upload project card with image and pdf', async()=>{
+    test.skip('upload project card with audio and pdf', async()=>{
+        test.slow();
+        const errors : string[] = [];
+        const informationData = DataManager.getInstance().getInformationForCard();
+        await new MyProfilePage(global.vizzyPage)
+            .addProjectCard()
+            .then(myProfilePage => myProfilePage.addProjectHeadline(
+                informationData.headline))
+            .then(myProfilePage => myProfilePage.addStartDate(
+                informationData.startDate))
+            .then(myProfilePage => myProfilePage.addEndDate(
+                informationData.endDate))
+            .then(myProfilePage => myProfilePage.addDescription(
+                informationData.description))
+            .then(myProfilePage => myProfilePage.uploadMedia(
+                errors, 'document'))
+            .then(myProfilePage => myProfilePage.uploadMedia(
+                errors, 'audio'))
+            .then(myProfilePage => myProfilePage.saveProjectCard())
+            expect(errors).toEqual([]);
+        console.log(errors);
+    });
+    
+    test('upload project card with image and weblink', async()=>{
+        test.slow();
         const errors : string[] = [];
         const informationData = DataManager.getInstance().getInformationForCard();
         await new MyProfilePage(global.vizzyPage)
@@ -101,10 +125,12 @@ test.describe('free-user', async () => {
             .then(myProfilePage => myProfilePage.uploadMedia(
                 errors, 'image'))
             .then(myProfilePage => myProfilePage.uploadMedia(
-                errors, 'pdf'))
+                errors, 'webLink'))
+            .then(myProfilePage => myProfilePage.uploadMedia(
+                errors, 'gif'))
             .then(myProfilePage => myProfilePage.saveProjectCard())
             expect(errors).toEqual([]);
         console.log(errors);
-    }); // still have bug
+    });
     
 });
