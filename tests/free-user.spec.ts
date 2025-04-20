@@ -79,7 +79,7 @@ test.describe('free-user', async () => {
             .then(myProfilePage=> myProfilePage.uploadProfileImage(image1, errors))
             .then(myProfilePage => myProfilePage.fillCoverVideo(testUser.coverVideo))
             .then(myProfilePage => myProfilePage.clickSaveAndVerifyModal());
-        expect(errors).toEqual([]);
+        expect.soft(errors).toEqual([]);
         console.log(errors);
     });
 
@@ -95,7 +95,7 @@ test.describe('free-user', async () => {
             .then(myProfilePage => myProfilePage.uploadMedia(errors, 'audio'))
             .then(myProfilePage => myProfilePage.countCarousel())
             .then(myProfilePage => myProfilePage.saveProjectCard())
-            expect(errors).toEqual([]);
+        expect.soft(errors).toEqual([]);
         console.log(errors);
     });
     
@@ -111,7 +111,7 @@ test.describe('free-user', async () => {
             .then(myProfilePage => myProfilePage.uploadMedia(errors, 'image'))
             .then(myProfilePage => myProfilePage.countCarousel())
             .then(myProfilePage => myProfilePage.saveProjectCard())
-            expect(errors).toEqual([]);
+            expect.soft(errors).toEqual([]);
         console.log(errors);
     });
 
@@ -127,7 +127,7 @@ test.describe('free-user', async () => {
             .then(myProfilePage => myProfilePage.uploadMedia(errors, 'document'))
             .then(myProfilePage => myProfilePage.countCarousel())
             .then(myProfilePage => myProfilePage.saveProjectCard())
-            expect(errors).toEqual([]);
+            expect.soft(errors).toEqual([]);
         console.log(errors);
     });
 
@@ -143,7 +143,7 @@ test.describe('free-user', async () => {
             .then(myProfilePage => myProfilePage.uploadMedia(errors, 'webLink'))
             .then(myProfilePage => myProfilePage.countCarousel())
             .then(myProfilePage => myProfilePage.saveProjectCard())
-            expect(errors).toEqual([]);
+            expect.soft(errors).toEqual([]);
         console.log(errors);
     });
 
@@ -159,7 +159,7 @@ test.describe('free-user', async () => {
             .then(myProfilePage => myProfilePage.uploadMedia(errors, 'gif'))
             .then(myProfilePage => myProfilePage.countCarousel())
             .then(myProfilePage => myProfilePage.saveProjectCard())
-            expect(errors).toEqual([]);
+            expect.soft(errors).toEqual([]);
         console.log(errors);
     });
 
@@ -174,6 +174,8 @@ test.describe('free-user', async () => {
             .then(myProfilePage => myProfilePage.uploadMedia(errors, 'audio'))
             .then(myProfilePage => myProfilePage.countCarousel())
             .then(myProfilePage => myProfilePage.saveMediaCard());
+            expect.soft(errors).toEqual([]);
+        console.log(errors);
     })
 
 
@@ -188,6 +190,8 @@ test.describe('free-user', async () => {
             .then(myProfilePage => myProfilePage.uploadMedia(errors, 'image'))
             .then(myProfilePage => myProfilePage.countCarousel())
             .then(myProfilePage => myProfilePage.saveMediaCard());
+            expect.soft(errors).toEqual([]);
+        console.log(errors);
     })
 
     test('add media card with pdf', async()=>{
@@ -201,6 +205,8 @@ test.describe('free-user', async () => {
             .then(myProfilePage => myProfilePage.uploadMedia(errors, 'document'))
             .then(myProfilePage => myProfilePage.countCarousel())
             .then(myProfilePage => myProfilePage.saveMediaCard());
+            expect.soft(errors).toEqual([]);
+        console.log(errors);
     })
     
     test('add media card with webLink', async()=>{
@@ -214,6 +220,8 @@ test.describe('free-user', async () => {
             .then(myProfilePage => myProfilePage.uploadMedia(errors, 'webLink'))
             .then(myProfilePage => myProfilePage.countCarousel())
             .then(myProfilePage => myProfilePage.saveMediaCard());
+            expect.soft(errors).toEqual([]);
+        console.log(errors);
     })
 
     test('add media card with gif', async()=>{
@@ -227,5 +235,7 @@ test.describe('free-user', async () => {
             .then(myProfilePage => myProfilePage.uploadMedia(errors, 'gif'))
             .then(myProfilePage => myProfilePage.countCarousel())
             .then(myProfilePage => myProfilePage.saveMediaCard());
+            expect.soft(errors).toEqual([]);
+        console.log(errors);
     })
 });
