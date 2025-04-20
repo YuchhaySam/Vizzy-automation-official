@@ -34,7 +34,7 @@ export const testData: TestData = {
             type: 'gif',
             path: '../test-data/media/image/2.gif',
             haveConfirmationModal: false,
-            requestURL: 'null'
+            requestURL: 'https://a.klaviyo.com/client/events/?company_id=Vxik2W'
         },
         {
             file: 'document',

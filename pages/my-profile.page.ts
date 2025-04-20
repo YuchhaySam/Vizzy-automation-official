@@ -13,7 +13,7 @@ export class MyProfilePage{
     
     async verifyMyProfileTitle(): Promise<this>{
         const title = "Profile | Vizzy";
-        await expect(this.page).toHaveTitle(title);
+        await expect(this.page).toHaveTitle(title, {timeout: 5000});
         return this;
     }
     async openBioEmptyState(){
@@ -140,63 +140,70 @@ export class MyProfilePage{
         await uploadPromise;
         caresouselCount++;
       }
-    async uploadMedia(errors: string[], mediaFile: string[]) {
+    async uploadMedia(errors: string[], mediaFile: string) {
         caresouselCount = 0; //reset the number 
         let mediaArray: DataForNormalCard[] = [];
         const testData = DataManager.getInstance().getDataForNormalCard();
-        for(const file of mediaFile){
-            for (const media of testData) {
-                if (media.file === file) {
-                    mediaArray.push(media);
-                }
-            }
-            for (const media of mediaArray) { 
-                if (media.file === 'document' || media.file === 'audio' || media.file === 'gif') {
-                    try {
-                        const filePath = path.join(__dirname, media.path);
-                        await this.uploadFileAndWait(
-                            this.page, filePath, media.requestURL, media.type);
-                        await expect(this.locator.fileNotSupportedError).not.toBeVisible();
-                        
-                    }catch(error){
-                        errors.push('file is not supported');
-                    }
-                }  else if (media.file === 'webLink') {
-                        try{
-                            await this.locator.addWebLinkInputField.fill(media.path);
-                            await this.locator.addWebLinkButton.click();
-                            await expect(this.locator.noDataWeblinkError).not.toBeVisible({ timeout: 5000 });
-                            await expect(this.locator.addWebLinkButton).toBeDisabled(
-                                { timeout: 5000 }
-                            );
-                            caresouselCount++;
-                        }catch(error){
-                            errors.push('weblink not found')
-                        }   
-                } else {
-                    try {
-                        const filePath = path.join(__dirname, media.path);
-                        await this.locator.addMediaInputField.setInputFiles(filePath);
-                        await expect(this.locator.fileNotSupportedError).not.toBeVisible();
-                        caresouselCount++;
-                    }catch(error){
-                        errors.push('file is not supported');
-                    }
-                }
-                    if (media.haveConfirmationModal) {
-                        try{
-                            await this.locator.confirmationSaveButton.click();
-                        }catch(error){
-                            errors.push('no confirmation modal')
-                        }
-                    }      
+        for (const media of testData) {
+            if (media.file === mediaFile) {
+                mediaArray.push(media);
             }
         }
-        
-        const carousel = await this.page.locator(this.locator.carouselContainer).all();
-        expect.soft(carousel.length).toEqual(caresouselCount);
+        for (const media of mediaArray) { 
+            if (media.file === 'document' || media.file === 'audio') {
+                try {
+                    const filePath = path.join(__dirname, media.path);
+                    await this.uploadFileAndWait(
+                        this.page, filePath, media.requestURL, media.type);
+                    await expect.soft(this.locator.fileNotSupportedError).not.toBeVisible();
+                    
+                }catch(error){
+                    errors.push('file is not supported');
+                }
+            }  else if (media.file === 'webLink') {
+                    try{
+                        await this.locator.addWebLinkInputField.fill(media.path);
+                        await this.locator.addWebLinkButton.click();
+                        caresouselCount++;
+                        await expect.soft(this.locator.noDataWeblinkError).not.toBeVisible({ timeout: 5000 });
+                        await expect(this.locator.addWebLinkButton).toBeDisabled(
+                            { timeout: 5000 }
+                        );
+                    }catch(error){
+                        errors.push('weblink not found')
+                    }   
+            } else {
+                try {
+                    const filePath = path.join(__dirname, media.path);
+                    await this.locator.addMediaInputField.setInputFiles(filePath);
+                    media.file === 'image'? console.log('image') 
+                        : await this.page.waitForSelector(this.locator.carouselContainer,
+                        {state:'visible'}
+                    );
+                    await expect.soft(this.locator.fileNotSupportedError).not.toBeVisible();
+                    caresouselCount++;
+                }catch(error){
+                    errors.push('file is not supported');
+                }
+            } 
+            if (media.haveConfirmationModal) {
+                try{
+                    await this.locator.confirmationSaveButton.click();
+                }catch(error){
+                    errors.push('no confirmation modal')
+                }
+            }      
+        }
         return this;
     }
+    async countCarousel(){
+        const count = caresouselCount;
+        const carouselLocator = this.page.locator(this.locator.carouselContainer);
+        const carousel = await carouselLocator.all();
+        expect.soft(carousel.length).toEqual(count);
+        return this;
+    }
+
     async saveProjectCard(){
         await this.locator.saveButton.click();
         await expect(this.locator.projectModal).not.toBeVisible(
@@ -233,6 +240,7 @@ export class MyProfilePage{
         await expect(this.locator.mediaCardModal).not.toBeVisible(
             {timeout:10000}
         );
+        return this;
     }
 };
 
