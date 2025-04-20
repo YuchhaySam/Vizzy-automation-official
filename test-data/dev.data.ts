@@ -20,21 +20,21 @@ export const testData: TestData = {
             type : 'jpeg',
             path : '../test-data/media/image/0.jpg',
             haveConfirmationModal: true,
-            requestURL: 'null'
+            requestURL: null
         },
         {
             file : 'image' ,
             type : 'png',
             path : '../test-data/media/image/1.png',
             haveConfirmationModal: true,
-            requestURL: 'null'
+            requestURL: null
         },
         {
             file: 'gif',
             type: 'gif',
             path: '../test-data/media/image/2.gif',
             haveConfirmationModal: false,
-            requestURL: 'https://a.klaviyo.com/client/events/?company_id=Vxik2W'
+            requestURL: null
         },
         {
             file: 'document',
@@ -83,21 +83,21 @@ export const testData: TestData = {
             type: 'youtube-video',
             path: 'https://www.youtube.com/watch?v=NTpbbQUBbuo',
             haveConfirmationModal: false,
-            requestURL: 'null'
+            requestURL: null
         },
         {
             file: 'webLink',
             type: 'vimeo-video',
             path: 'https://vimeo.com/1073443416',
             haveConfirmationModal: false,
-            requestURL: 'null'
+            requestURL: null
         },
         {
             file: 'webLink',
             type: 'normal-weblink',
             path: 'https://www.nytimes.com/international/',
             haveConfirmationModal: false,
-            requestURL: 'null'
+            requestURL: null
         },
     ],
     informationForCard:{

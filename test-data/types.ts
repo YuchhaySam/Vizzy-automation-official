@@ -25,7 +25,7 @@ export interface DataForNormalCard{
     type: string,
     path: string,
     haveConfirmationModal: boolean,
-    requestURL: string
+    requestURL: string | null
 }
 
 export interface informationForCard{

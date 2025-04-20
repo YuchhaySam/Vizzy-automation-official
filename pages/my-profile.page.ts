@@ -1,4 +1,4 @@
-import { Response , expect, Page, Locator } from "@playwright/test";
+import { Response , expect, Page } from "@playwright/test";
 import { myProfileLocator } from "./my-profile.locator";
 import path from "path";
 import { DataManager } from "../utils/data-manager";
@@ -126,13 +126,13 @@ export class MyProfilePage{
         await this.locator.addCardDescription.fill(description);
         return this;
     }
-    async uploadFileAndWait(page: Page, filePath: string, requestURL: string, mediaType: string): Promise<void> {
+    async uploadFileAndWait(page: Page, filePath: string, requestURL: string | null, mediaType: string): Promise<void> {
         // Trigger the file upload first
         const uploadPromise = this.locator.addMediaInputField.setInputFiles( filePath);
         // Wait for the specific upload API response after triggering the upload
         const uploadResponse = await page.waitForResponse((response: Response) => {
-            const isUploadUrl = response.url().includes(requestURL); // your upload API URL
-            const isPostMethod = response.request().method() === 'POST'; // ensure it's a POST request
+            const isUploadUrl = requestURL ? response.url().includes(requestURL) : false;
+            const isPostMethod = response.request().method() === 'POST'; 
             return isUploadUrl && isPostMethod;         
         });
         await page.waitForTimeout(1000);
@@ -196,6 +196,7 @@ export class MyProfilePage{
         }
         return this;
     }
+    
     async countCarousel(){
         const count = caresouselCount;
         const carouselLocator = this.page.locator(this.locator.carouselContainer);

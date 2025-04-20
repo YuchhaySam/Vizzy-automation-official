@@ -1,9 +1,8 @@
-import { Page, test, expect } from "@playwright/test";
+import { test, expect } from "@playwright/test";
 import { DataManager } from "../utils/data-manager";
 import { VizzyLandingPage } from "../pages/vizzy-landing-page.page";
 import { MyProfilePage } from "../pages/my-profile.page";
 import path from "path";
-import { myProfileLocator } from "../pages/my-profile.locator";
 
 test.describe('free-user', async () => {
     let authState: {
@@ -218,7 +217,6 @@ test.describe('free-user', async () => {
     })
 
     test('add media card with gif', async()=>{
-        test.slow();
         const errors : string[] = [];
         const informationData = DataManager.getInstance().getInformationForCard();
         await new MyProfilePage(global.vizzyPage)
