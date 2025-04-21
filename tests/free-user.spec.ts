@@ -84,7 +84,7 @@ test.describe('free-user', async () => {
         console.log(errors);
     });
 
-    test.skip('upload project card with audio', async()=>{
+    test('upload project card with audio', async()=>{
         const errors : string[] = [];
         const informationData = DataManager.getInstance().getInformationForCard();
         await new MyProfilePage(global.vizzyPage)
@@ -100,7 +100,7 @@ test.describe('free-user', async () => {
         console.log(errors);
     });
     
-    test.skip('upload project card with image', async()=>{
+    test('upload project card with image', async()=>{
         const errors : string[] = [];
         const informationData = DataManager.getInstance().getInformationForCard();
         await new MyProfilePage(global.vizzyPage)
@@ -116,7 +116,7 @@ test.describe('free-user', async () => {
         console.log(errors);
     });
 
-    test.skip('upload project card with pdf', async()=>{
+    test('upload project card with pdf', async()=>{
         const errors : string[] = [];
         const informationData = DataManager.getInstance().getInformationForCard();
         await new MyProfilePage(global.vizzyPage)
@@ -132,7 +132,7 @@ test.describe('free-user', async () => {
         console.log(errors);
     });
 
-    test.skip('upload project card with webLink', async()=>{
+    test('upload project card with webLink', async()=>{
         const errors : string[] = [];
         const informationData = DataManager.getInstance().getInformationForCard();
         await new MyProfilePage(global.vizzyPage)
@@ -318,7 +318,7 @@ test.describe('free-user', async () => {
             .then(myProfilePage => myProfilePage.verifyPsychCard())
     })
 
-    test('retake psych test', async()=>{
+    test.skip('retake psych test', async()=>{
         await new SettingPage(global.vizzyPage)
             .clickOnSettingIcon()
             .then(settingPage => settingPage.clickOnRetakeTest())
@@ -327,4 +327,6 @@ test.describe('free-user', async () => {
             .then(myProfilePage => myProfilePage.clickOnMyProfileIcon())
             .then(myProfilePage => myProfilePage.verifyPsychCard());
     })
+    
+    
 });

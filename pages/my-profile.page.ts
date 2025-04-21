@@ -191,6 +191,7 @@ export class MyProfilePage{
             if (media.haveConfirmationModal) {
                 try{
                     await this.locator.confirmationSaveButton.click();
+                    await expect(this.locator.cardImagEditModal).not.toBeVisible();
                 }catch(error){
                     errors.push('no confirmation modal')
                 }
@@ -341,14 +342,74 @@ export class MyProfilePage{
     }
     async verifyPsychCard(){
         const cardLocator = this.locator.completePsychCard;
-        await expect(cardLocator).toContainText(/Introverted\W*feeling/i);
-        await expect(cardLocator).toContainText(/Introverted\W*thinking/i);
-        await expect(cardLocator).toContainText(/Extroverted\W*feeling/i);
-        await expect(cardLocator).toContainText(/Extroverted\W*thinking/i);
+        await expect.soft(cardLocator).toContainText(/Introverted\W*feeling/i);
+        await expect.soft(cardLocator).toContainText(/Introverted\W*thinking/i);
+        await expect.soft(cardLocator).toContainText(/Extroverted\W*feeling/i);
+        await expect.soft(cardLocator).toContainText(/Extroverted\W*thinking/i);
     }
     async clickOnMyProfileIcon(){
         await this.locator.myProfileIcon.click();
         return this;
+    }
+    async addEducationCard(){
+        await this.locator.addContentButton.click();
+        await this.locator.addEducationButton.click();
+        await expect(this.locator.educationCardModal).toBeVisible();
+        return this;
+    }
+    async verifyProjectCardInformationContent(
+        headline: string,
+        date:string,
+        description: string
+    ){
+        await this.locator.projectCardDateAfterSaved.scrollIntoViewIfNeeded();
+        await expect.soft(this.locator.projectCardTitleAfterSaved).toHaveText('Project');
+        await expect.soft(this.locator.HeadlineAfterSaved).toHaveText(headline);
+        await expect.soft(this.locator.projectCardDateAfterSaved).toHaveText(date);
+        await expect.soft(this.locator.DescriptionAfterSaved).toHaveText(description);
+        return this;
+    }
+    async deleteCard(){
+        await this.locator.contentNavigationContainer.hover();
+        await this.locator.deleteCardButton.click();
+        await expect(this.locator.deleteCardModal).toBeVisible();
+        await this.locator.confirmToDeleteButton.click();
+        await expect(this.locator.contentNavigationContainer).not.toBeVisible();
+        return this;
+    }
+    async checkAudioThumbnail(){
+        const audioLocator = this.locator.audioThumbnail;
+        for(const audio of audioLocator){
+            await expect.soft(audio).toBeVisible();
+            await this.locator.nextNavgiationOnContentButton.click();
+        }
+        return this;
+    }
+    async checkPdfThumbnail(){
+        const pdfLocator = this.locator.pdfThumbNail;
+        for(const pdf of pdfLocator){
+            await expect.soft(pdf).toBeVisible();
+            await this.locator.nextNavgiationOnContentButton.click();
+        }
+        return this;
+    }
+    async checkWebLinkThumbnail(){
+        const webLinkLocator = this.locator.webLinkThumbnail;
+        for(const webLink of webLinkLocator){
+            await expect.soft(webLink).toBeVisible();
+            await this.locator.nextNavgiationOnContentButton.click();
+        }
+        return this;
+    }
+    async checkImageThumbnail(type: string){
+        if(type==='image'){
+            for(let i = 0; i<2; i++){
+                await expect(this.locator.imageThumbnail).toBeVisible();
+                await this.locator.nextNavgiationOnContentButton.click();
+            }
+        } else{
+            await expect(this.locator.imageThumbnail).toBeVisible();
+        }
     }
 };
 

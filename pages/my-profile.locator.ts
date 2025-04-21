@@ -182,4 +182,77 @@ export class myProfileLocator{
     get myProfileIcon(){
         return this.page.getByRole('link', { name: 'My profile' });
     }
+    get educationCardContainer(){
+        return this.page.locator(`//div[@class='Card_cardContent__fbo_R Card_adjustSpacing__x578E']//div//div//div[@role='button']`);
+    }
+    get educationCardModal(){
+        return this.page.getByText('Add educationUpload CV BetaGet all eyes on your qualifications.Institution *');
+    }
+    get institutionInputField(){
+        return this.page.getByRole('textbox', { name: 'Institution(this field is' });
+    }
+    get instituationURL(){
+        return this.page.getByRole('textbox', { name: 'Institution URL' });
+    }
+    get qualification(){
+        return this.page.getByRole('textbox', { name: 'Qualification(this field is' });
+    }
+    get cardImagEditModal(){
+        return this.page.getByText('EditResetFreeWidescreenPortraitClassicSquareCancelSave');
+    }
+    get projectCardTitleAfterSaved(){
+        return this.page.locator('span').filter({ hasText: 'Project' }).first();
+    }
+    get HeadlineAfterSaved(){
+        return this.page.locator('#content').getByText('Vizzy', { exact: true });
+    }
+    get projectCardDateAfterSaved(){
+        return this.page.getByText('Feb 05 – Sep');
+    }
+    get DescriptionAfterSaved(){
+        return this.page.getByText('I have nothing to show you');
+    }
+    get deleteCardButton(){
+        return this.page.getByRole('button', { name: 'Remove' });
+    }
+    get contentNavigationContainer(){
+        return this.page.locator('.Carousel_navigation__FjCPu');
+    }
+    get deleteCardModal(){
+        return this.page.getByText('Delete cardAre you sure you');
+    }
+    get confirmToDeleteButton(){
+        return this.page.getByRole('button', { name: 'Delete' });
+    }
+    get nextNavgiationOnContentButton(){
+        return this.page.getByRole('button', { name: 'Next' });
+    }
+    get previousNavigationOnContentButton(){
+        return this.page.getByRole('button', { name: 'Previous' });
+    }
+    get audioThumbnail(){
+        return[
+            this.page.locator('.Media_coverAsset__xLOzW').first(),
+            this.page.locator('div:nth-child(2) > div > .Media_media__4HM3f > .Media_coverAsset__xLOzW'),
+            this.page.locator('div:nth-child(3) > div > .Media_media__4HM3f > .Media_coverAsset__xLOzW'),
+            this.page.locator('div:nth-child(4) > div > .Media_media__4HM3f > .Media_coverAsset__xLOzW'),
+            this.page.locator('div:nth-child(5) > div > .Media_media__4HM3f > .Media_coverAsset__xLOzW')
+        ]
+    }
+    get pdfThumbNail(){
+        return [
+            this.page.getByRole('button', { name: 'button' }).first(),
+            this.page.getByRole('button', { name: 'button' }).nth(2)
+        ]
+    }
+    get webLinkThumbnail(){
+        return [
+            this.page.getByRole('button', { name: 'Thumbnail Clicked' }),
+            this.page.getByRole('button', { name: 'Thumbnail Clicked' }),
+            this.page.getByRole('img', { name: 'nytimes.com' })
+        ]
+    }
+    get imageThumbnail(){
+        return this.page.getByRole('img', { name: 'cards/' });
+    }
 }
