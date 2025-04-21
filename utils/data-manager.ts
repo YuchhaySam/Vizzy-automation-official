@@ -23,4 +23,7 @@ export class DataManager {
     public getInformationForCard(){
         return this.testData.informationForCard;
     }
+    public getPsychAnswer(){
+        return this.testData.psychAnswer;
+    }
 }

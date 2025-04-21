@@ -3,6 +3,7 @@ import { myProfileLocator } from "./my-profile.locator";
 import path from "path";
 import { DataManager } from "../utils/data-manager";
 import { DataForNormalCard } from "../test-data/types";
+import { SettingPage } from "./setting.page";
 
 let caresouselCount = 0;
 export class MyProfilePage{
@@ -108,6 +109,7 @@ export class MyProfilePage{
         await this.locator.addProjectButton.click();
         await this.locator.projectModal.waitFor({state:'visible'});
         await expect(this.locator.projectModal).toBeVisible();
+        await expect(this.locator.projectCardTitle).toHaveText('Add project card');
         return this;
     }
     async addProjectHeadline(headline:string){
@@ -216,6 +218,7 @@ export class MyProfilePage{
         await this.locator.addContentButton.click();
         await this.locator.addMediaButton.click();
         await expect(this.locator.mediaCardModal).toBeVisible();
+        await expect(this.locator.mediaCardTitle).toHaveText('Add media card');
         return this;
     }
     async selectVizzyPrompt(prompt: string){
@@ -241,6 +244,110 @@ export class MyProfilePage{
         await expect(this.locator.mediaCardModal).not.toBeVisible(
             {timeout:10000}
         );
+        return this;
+    }
+    async addQACard(){
+        await this.locator.addContentButton.click();
+        await this.locator.addQAButton.click();
+        await expect(this.locator.QAModal).toBeVisible();
+        await expect(this.locator.QACardTitle).toHaveText('Add Q&A card');
+        return this;
+    }
+    async selectQAQuestion(questionText: string){
+        await this.locator.QAQuestionsDropdownContainer.click();
+        const allQuestions = await this.locator.QAQuestionsDropdownSelection.all();
+        for(const questions of allQuestions){
+            const text = await questions.innerText();
+            if(questionText === text){
+                await questions.click();
+            }
+        }
+        await expect(this.locator.QAQuestionsDropdownContainer).toHaveText(questionText);
+        return this;
+    }
+    async answeringQA(description: string){
+        await this.locator.addCardDescription.fill(description);
+        return this;
+    }
+    async saveQACard(){
+        await this.locator.saveButton.click();
+        await expect(this.locator.QAModal).not.toBeVisible(
+            {timeout: 10000}
+        );
+        return this;
+    }
+    async addPsychCard(){
+        await this.locator.addPsychometricButton.hover();
+        await this.locator.addPsychometricButton.click();
+        return this;
+    }
+    async clickOnTakeTest(){
+        await expect(this.locator.psychoCardTitle).toHaveText('How does the psychometrictest work?');
+        await this.locator.takeTestButton.click();
+        await expect(this.locator.psychModal).toBeVisible();
+        await this.locator.psychAnswer.first().waitFor({state:'visible'});
+        return this;
+    }
+
+    async answerAndRateQuestion(
+        answerIndex1: number,
+        answerIndex2: number,
+        ratingIndex1: number,
+        ratingIndex2: number
+    ): Promise<void> {
+        const answerCount = await this.locator.psychAnswer.count();
+        if (answerIndex1 >= answerCount || answerIndex2 >= answerCount || answerIndex1 < 0 || answerIndex2 < 0 || answerIndex1 === answerIndex2) {
+            throw new Error(`Invalid answer indices provided (${answerIndex1}, ${answerIndex2}) for ${answerCount} available answers.`);
+        }
+        const firstAnswer = this.locator.psychAnswer.nth(answerIndex1);
+        const secondAnswer = this.locator.psychAnswer.nth(answerIndex2);
+        await firstAnswer.click();  
+        await secondAnswer.click();
+
+        await expect(this.locator.ratingButton.first()).toBeVisible();
+        const ratingCount = await this.locator.ratingButton.count();
+        if (ratingIndex1 >= ratingCount || ratingIndex2 >= ratingCount || ratingIndex1 < 0 || ratingIndex2 < 0) {
+             throw new Error(`Invalid rating indices provided (${ratingIndex1}, ${ratingIndex2}) for ${ratingCount} available ratings.`);
+        }
+        const firstRating = this.locator.ratingButton.nth(ratingIndex1);
+        const secondRating = this.locator.ratingButton.nth(ratingIndex2);
+
+        await firstRating.click();
+        await secondRating.click();
+        await expect(this.locator.psychNextButton).toBeEnabled();
+        await this.locator.psychNextButton.click();
+        await expect(this.locator.psychAnswer.first()).toBeVisible(); 
+    }
+
+    async answerAndRatePsych(){
+        const psychAnswer = DataManager.getInstance().getPsychAnswer();
+        for (const step of psychAnswer) {
+            console.log(`--- Starting Page ${step.page} ---`);
+            await this.answerAndRateQuestion(
+                step.answerIndex1,
+                step.answerIndex2,
+                step.ratingIndex1,
+                step.ratingIndex2
+            );
+        }
+        const hePronounce = this.locator.psychAnswer.nth(0);
+        const shePronounce = this.locator.psychAnswer.nth(1);
+        const theyPronounce = this.locator.psychAnswer.nth(2);
+
+        await hePronounce.click();
+        await this.locator.psychSubmitButton.click();
+        await expect(this.locator.psychSubmitButton).not.toBeVisible();
+        return this;
+    }
+    async verifyPsychCard(){
+        const cardLocator = this.locator.completePsychCard;
+        await expect(cardLocator).toContainText(/Introverted\W*feeling/i);
+        await expect(cardLocator).toContainText(/Introverted\W*thinking/i);
+        await expect(cardLocator).toContainText(/Extroverted\W*feeling/i);
+        await expect(cardLocator).toContainText(/Extroverted\W*thinking/i);
+    }
+    async clickOnMyProfileIcon(){
+        await this.locator.myProfileIcon.click();
         return this;
     }
 };

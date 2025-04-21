@@ -22,7 +22,7 @@ export class myProfileLocator{
         return this.page.getByRole('textbox', { name: 'Current business or faculty URL' });
     }
     get bioInputField(){
-        return this.page.getByRole('paragraph').filter({ hasText: /^$/ });
+        return this.page.getByRole('paragraph').filter({ hasText: /^$/ }); 
     }
     get saveButton(){
         return this.page.getByRole('button', { name: 'Save' });
@@ -96,7 +96,7 @@ export class myProfileLocator{
         return this.page.locator(`//div[@role='button' and contains(@class, 'UploadCVModal_label__h_bEw')]//input[@type='file']`);
     }
     get addCardDescription(){
-        return this.page.getByRole('paragraph').filter({ hasText: /^$/ });
+        return this.page.getByRole('paragraph').filter({ hasText: /^$/ }); 
     }
     get addStartDate(){
         return this.page.getByRole('textbox', { name: 'Start date(this field is' });
@@ -134,4 +134,52 @@ export class myProfileLocator{
     get mediaCardHeadline(){
         return this.page.getByRole('textbox', { name: 'Headline' });
     }
-};
+    get psychAnswer(){
+        return this.page.locator(`//div[contains(@class,'QuestionnaireModal_statements__T7FJL')]/button`);
+    }
+    get QAQuestionsDropdownContainer(){
+        return this.page.getByRole('button', { name: 'Question(this field is' });
+    }
+    get QAQuestionsDropdownSelection(){
+        return this.page.locator(`//ul[contains(@class,'FormFields_options__iEtje')]/li`);
+    }
+    get QAModal(){
+        return this.page.locator('#modal-lightbox div').filter({ hasText: 'Add Q&A cardShare your ideas' }).nth(1);
+    }
+    get addPsychometricButton(){
+        return this.page.getByRole('button', { name: 'Add Psychometrics' });
+    }
+    get projectCardTitle(){
+        return this.page.getByText('Add project card');
+    }
+    get mediaCardTitle(){
+        return this.page.getByText('Add media card', { exact: true });
+    }
+    get QACardTitle(){
+        return this.page.getByText('Add Q&A card');
+    }
+    get psychoCardTitle(){
+        return this.page.getByRole('heading', { name: 'How does the psychometric' });
+    }
+    get takeTestButton(){
+        return this.page.getByRole('button', { name: 'Take test' });
+    }
+    get ratingButton(){
+        return this.page.locator(`//div[@class='QuestionnaireModal_rankings__7XZn4']/button`);
+    }
+    get psychModal(){
+        return this.page.locator('#modal-lightbox');
+    }
+    get psychNextButton(){
+        return this.page.getByText('Next');
+    }
+    get psychSubmitButton(){
+        return this.page.getByRole('button', { name: 'Submit' });
+    }
+    get completePsychCard(){
+        return this.page.locator(`//div[@class='Card_cardContent__fbo_R Card_adjustSpacing__x578E PsychometricCard_psychContainer__j7glO']`);
+    }
+    get myProfileIcon(){
+        return this.page.getByRole('link', { name: 'My profile' });
+    }
+}

@@ -1,7 +1,8 @@
 export interface TestData{
     user: User,
     dataForNormalCard: DataForNormalCard[],
-    informationForCard: informationForCard
+    informationForCard: informationForCard,
+    psychAnswer : PsychAnswer[]
 }
 
 export interface User{
@@ -33,7 +34,16 @@ export interface informationForCard{
     startDate: string,
     endDate: string,
     description: string,
-    answer: string
+    answer: string,
+    question: string
+}
+
+export interface PsychAnswer{
+    page: number,
+    answerIndex1 : number,
+    answerIndex2 : number,
+    ratingIndex1: number,
+    ratingIndex2: number
 }
 
 

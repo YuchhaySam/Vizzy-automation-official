@@ -2,9 +2,9 @@ import { TestData} from "./types";
 
 export const testData: TestData = {
     user: {
-        firstName: "Trin",
-        lastName: "Brewmen",
-        email: "trinbrewmen@mailinator.com",
+        firstName: "Ct",
+        lastName: "bot",
+        email: "ct_bot@mailinator.com",
         password: "Yuchhaysam123@",
         location: "London, UK",
         pronoun: "He / Him",
@@ -40,6 +40,13 @@ export const testData: TestData = {
             file: 'document',
             type: 'pdf',
             path: '../test-data/media/pdf/0.pdf',
+            haveConfirmationModal: false,
+            requestURL: 'v1_1/thinking-sky-blue-limited/image/upload'
+        },
+        {
+            file: 'document',
+            type: 'pdf',
+            path: '../test-data/media/pdf/1.pdf',
             haveConfirmationModal: false,
             requestURL: 'v1_1/thinking-sky-blue-limited/image/upload'
         },
@@ -105,6 +112,19 @@ export const testData: TestData = {
         startDate: '02/2005',
         endDate: '09/2022',
         description: 'I have nothing to show you all here',
-        answer: 'This is an automation answers'
-    }
+        answer: 'This is an automation answers',
+        question: `In the next three years, I'd like to…`
+    },
+    psychAnswer : [
+        { page: 1, answerIndex1: 0, answerIndex2: 2, ratingIndex1: 4, ratingIndex2: 7 },
+        { page: 2, answerIndex1: 1, answerIndex2: 3, ratingIndex1: 0, ratingIndex2: 1 },
+        { page: 3, answerIndex1: 0, answerIndex2: 1, ratingIndex1: 6, ratingIndex2: 5 },
+        { page: 4, answerIndex1: 2, answerIndex2: 3, ratingIndex1: 2, ratingIndex2: 3 },
+        { page: 5, answerIndex1: 0, answerIndex2: 3, ratingIndex1: 7, ratingIndex2: 0 },
+        { page: 6, answerIndex1: 1, answerIndex2: 2, ratingIndex1: 5, ratingIndex2: 4 },
+        { page: 7, answerIndex1: 0, answerIndex2: 1, ratingIndex1: 1, ratingIndex2: 6 },
+        { page: 8, answerIndex1: 3, answerIndex2: 1, ratingIndex1: 0, ratingIndex2: 7 },
+        { page: 9, answerIndex1: 0, answerIndex2: 2, ratingIndex1: 3, ratingIndex2: 2 },
+        { page: 10, answerIndex1: 1, answerIndex2: 3, ratingIndex1: 4, ratingIndex2: 5 },
+    ]
 }

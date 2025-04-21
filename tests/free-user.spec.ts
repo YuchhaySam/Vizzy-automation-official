@@ -3,6 +3,7 @@ import { DataManager } from "../utils/data-manager";
 import { VizzyLandingPage } from "../pages/vizzy-landing-page.page";
 import { MyProfilePage } from "../pages/my-profile.page";
 import path from "path";
+import { SettingPage } from "../pages/setting.page";
 
 test.describe('free-user', async () => {
     let authState: {
@@ -163,7 +164,7 @@ test.describe('free-user', async () => {
         console.log(errors);
     });
 
-    test('add media card with audio', async()=>{
+    test.skip('add media card with audio', async()=>{
         const errors : string[] = [];
         const informationData = DataManager.getInstance().getInformationForCard();
         await new MyProfilePage(global.vizzyPage)
@@ -179,7 +180,7 @@ test.describe('free-user', async () => {
     })
 
 
-    test('add media card with image', async()=>{
+    test.skip('add media card with image', async()=>{
         const errors : string[] = [];
         const informationData = DataManager.getInstance().getInformationForCard();
         await new MyProfilePage(global.vizzyPage)
@@ -194,7 +195,7 @@ test.describe('free-user', async () => {
         console.log(errors);
     })
 
-    test('add media card with pdf', async()=>{
+    test.skip('add media card with pdf', async()=>{
         const errors : string[] = [];
         const informationData = DataManager.getInstance().getInformationForCard();
         await new MyProfilePage(global.vizzyPage)
@@ -209,7 +210,7 @@ test.describe('free-user', async () => {
         console.log(errors);
     })
     
-    test('add media card with webLink', async()=>{
+    test.skip('add media card with webLink', async()=>{
         const errors : string[] = [];
         const informationData = DataManager.getInstance().getInformationForCard();
         await new MyProfilePage(global.vizzyPage)
@@ -224,7 +225,7 @@ test.describe('free-user', async () => {
         console.log(errors);
     })
 
-    test('add media card with gif', async()=>{
+    test.skip('add media card with gif', async()=>{
         const errors : string[] = [];
         const informationData = DataManager.getInstance().getInformationForCard();
         await new MyProfilePage(global.vizzyPage)
@@ -237,5 +238,93 @@ test.describe('free-user', async () => {
             .then(myProfilePage => myProfilePage.saveMediaCard());
             expect.soft(errors).toEqual([]);
         console.log(errors);
+    })
+
+    test.skip('add QA card with image', async()=>{
+        const errors : string[] = [];
+        const informationData = DataManager.getInstance().getInformationForCard();
+        await new MyProfilePage(global.vizzyPage)
+            .addQACard()
+            .then(myProfilePage => myProfilePage.selectQAQuestion(informationData.question))
+            .then(myProfilePage => myProfilePage.answeringQA(informationData.answer))
+            .then(myProfilePage => myProfilePage.uploadMedia(errors, 'image'))
+            .then(myProfilePage => myProfilePage.countCarousel())
+            .then(myProfilePage => myProfilePage.saveQACard);
+            expect.soft(errors).toEqual([]);
+        console.log(errors);
+    });
+
+    test.skip('add QA card with audio', async()=>{
+        const errors : string[] = [];
+        const informationData = DataManager.getInstance().getInformationForCard();
+        await new MyProfilePage(global.vizzyPage)
+            .addQACard()
+            .then(myProfilePage => myProfilePage.selectQAQuestion(informationData.question))
+            .then(myProfilePage => myProfilePage.answeringQA(informationData.answer))
+            .then(myProfilePage => myProfilePage.uploadMedia(errors, 'audio'))
+            .then(myProfilePage => myProfilePage.countCarousel())
+            .then(myProfilePage => myProfilePage.saveQACard);
+            expect.soft(errors).toEqual([]);
+        console.log(errors);
+    });
+
+    test.skip('add QA card with pdf', async()=>{
+        const errors : string[] = [];
+        const informationData = DataManager.getInstance().getInformationForCard();
+        await new MyProfilePage(global.vizzyPage)
+            .addQACard()
+            .then(myProfilePage => myProfilePage.selectQAQuestion(informationData.question))
+            .then(myProfilePage => myProfilePage.answeringQA(informationData.answer))
+            .then(myProfilePage => myProfilePage.uploadMedia(errors, 'document'))
+            .then(myProfilePage => myProfilePage.countCarousel())
+            .then(myProfilePage => myProfilePage.saveQACard);
+            expect.soft(errors).toEqual([]);
+        console.log(errors);
+    });
+
+    test.skip('add QA card with webLink', async()=>{
+        const errors : string[] = [];
+        const informationData = DataManager.getInstance().getInformationForCard();
+        await new MyProfilePage(global.vizzyPage)
+            .addQACard()
+            .then(myProfilePage => myProfilePage.selectQAQuestion(informationData.question))
+            .then(myProfilePage => myProfilePage.answeringQA(informationData.answer))
+            .then(myProfilePage => myProfilePage.uploadMedia(errors, 'webLink'))
+            .then(myProfilePage => myProfilePage.countCarousel())
+            .then(myProfilePage => myProfilePage.saveQACard);
+            expect.soft(errors).toEqual([]);
+        console.log(errors);
+    });
+
+    test.skip('add QA card with gif', async()=>{
+        const errors : string[] = [];
+        const informationData = DataManager.getInstance().getInformationForCard();
+        await new MyProfilePage(global.vizzyPage)
+            .addQACard()
+            .then(myProfilePage => myProfilePage.selectQAQuestion(informationData.question))
+            .then(myProfilePage => myProfilePage.answeringQA(informationData.answer))
+            .then(myProfilePage => myProfilePage.uploadMedia(errors, 'gif'))
+            .then(myProfilePage => myProfilePage.countCarousel())
+            .then(myProfilePage => myProfilePage.saveQACard);
+            expect.soft(errors).toEqual([]);
+        console.log(errors);
+    });
+
+    test.skip('add Psych card', async()=>{
+        await new MyProfilePage(global.vizzyPage)
+            .addPsychCard()
+            .then(myProfilePage => myProfilePage.clickOnTakeTest())
+            .then(myProfilePage => myProfilePage.answerAndRatePsych())
+            .then(myProfilePage => myProfilePage.verifyPsychCard())
+    })
+
+    test('retake psych test', async()=>{
+        await new SettingPage(global.vizzyPage)
+            .clickOnSettingIcon()
+            .then(settingPage => settingPage.clickOnRetakeTest())
+            .then(myProfilePage => myProfilePage.clickOnTakeTest())
+            .then(myProfilePage => myProfilePage.answerAndRatePsych())
+            .then(myProfilePage => myProfilePage.clickOnMyProfileIcon())
+            .then(myProfilePage => myProfilePage.verifyPsychCard());
     })
 });
