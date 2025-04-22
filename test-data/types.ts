@@ -34,8 +34,8 @@ export interface informationForCard{
     startDate: string,
     endDate: string,
     description: string,
-    answer: string,
-    question: string
+    question: string,
+    prompt: string
 }
 
 export interface PsychAnswer{

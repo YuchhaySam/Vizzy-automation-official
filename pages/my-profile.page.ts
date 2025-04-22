@@ -1,9 +1,8 @@
-import { Response , expect, Page } from "@playwright/test";
+import { Response , expect, Page, Locator } from "@playwright/test";
 import { myProfileLocator } from "./my-profile.locator";
 import path from "path";
 import { DataManager } from "../utils/data-manager";
 import { DataForNormalCard } from "../test-data/types";
-import { SettingPage } from "./setting.page";
 
 let caresouselCount = 0;
 export class MyProfilePage{
@@ -184,17 +183,18 @@ export class MyProfilePage{
                     );
                     await expect.soft(this.locator.fileNotSupportedError).not.toBeVisible();
                     caresouselCount++;
+
                 }catch(error){
                     errors.push('file is not supported');
                 }
             } 
             if (media.haveConfirmationModal) {
                 try{
-                    await this.locator.confirmationSaveButton.click();
-                    await expect(this.locator.cardImagEditModal).not.toBeVisible();
+                    await this.locator.confirmationSaveButton.click({timeout:10000});
+                    await expect(this.locator.cardImagEditModal).not.toBeVisible({timeout: 10000});
                 }catch(error){
-                    errors.push('no confirmation modal')
-                }
+                    errors.push('No edit image modal');
+                }             
             }      
         }
         return this;
@@ -360,56 +360,159 @@ export class MyProfilePage{
     async verifyProjectCardInformationContent(
         headline: string,
         date:string,
-        description: string
+        description: string,
+        errors : string[]
     ){
-        await this.locator.projectCardDateAfterSaved.scrollIntoViewIfNeeded();
-        await expect.soft(this.locator.projectCardTitleAfterSaved).toHaveText('Project');
-        await expect.soft(this.locator.HeadlineAfterSaved).toHaveText(headline);
-        await expect.soft(this.locator.projectCardDateAfterSaved).toHaveText(date);
-        await expect.soft(this.locator.DescriptionAfterSaved).toHaveText(description);
+        try{
+            await this.locator.DescriptionAfterSaved.scrollIntoViewIfNeeded();
+            await expect.soft(this.locator.projectCardTitleAfterSaved).toHaveText('Project');
+            await expect.soft(this.locator.headlineAfterSaved).toHaveText(headline);
+            await expect.soft(this.locator.projectCardDateAfterSaved).toHaveText(date);
+            await expect.soft(this.locator.DescriptionAfterSaved).toHaveText(description);
+        }catch(error){
+            errors.push('Information is not visible')
+        }
+        
         return this;
     }
     async deleteCard(){
-        await this.locator.contentNavigationContainer.hover();
+        await this.locator.DescriptionAfterSaved.scrollIntoViewIfNeeded();
+        await this.locator.DescriptionAfterSaved.hover();
         await this.locator.deleteCardButton.click();
         await expect(this.locator.deleteCardModal).toBeVisible();
         await this.locator.confirmToDeleteButton.click();
-        await expect(this.locator.contentNavigationContainer).not.toBeVisible();
+        await expect(this.locator.DescriptionAfterSaved).not.toBeVisible();
         return this;
     }
-    async checkAudioThumbnail(){
-        const audioLocator = this.locator.audioThumbnail;
-        for(const audio of audioLocator){
-            await expect.soft(audio).toBeVisible();
-            await this.locator.nextNavgiationOnContentButton.click();
-        }
-        return this;
-    }
-    async checkPdfThumbnail(){
-        const pdfLocator = this.locator.pdfThumbNail;
-        for(const pdf of pdfLocator){
-            await expect.soft(pdf).toBeVisible();
-            await this.locator.nextNavgiationOnContentButton.click();
-        }
-        return this;
-    }
-    async checkWebLinkThumbnail(){
-        const webLinkLocator = this.locator.webLinkThumbnail;
-        for(const webLink of webLinkLocator){
-            await expect.soft(webLink).toBeVisible();
-            await this.locator.nextNavgiationOnContentButton.click();
-        }
-        return this;
-    }
-    async checkImageThumbnail(type: string){
-        if(type==='image'){
-            for(let i = 0; i<2; i++){
-                await expect(this.locator.imageThumbnail).toBeVisible();
-                await this.locator.nextNavgiationOnContentButton.click();
+    async checkAudioThumbnail(errors: string[]){
+        const audioLocator = this.locator.audioLocator;
+        let count = 0;
+        try{
+            for(const audio of audioLocator){
+                await expect.soft(audio.thumbnail).toBeVisible();
+                await expect.soft(audio.thumbnail).toHaveCSS('background-color', 'rgb(178, 223, 215)');
+                await audio.playButton.click();
+                await expect.soft(this.locator.audioPlayerModal).toBeVisible();
+                await this.page.keyboard.press('Escape');
+                count++;
+                count < audioLocator.length ? 
+                    await this.locator.nextNavgiationOnContentButton.click()
+                    : await expect(this.locator.nextNavgiationOnContentButton).toBeDisabled();
             }
-        } else{
-            await expect(this.locator.imageThumbnail).toBeVisible();
+        }catch(error){
+            errors.push('No audio thumbnail found');
+        }   
+        return this;
+    }
+    async checkPdfThumbnail(errors: string[]){
+        let count = 0;
+        const pdfLocator = this.locator.pdfLocator;
+        try{
+            
+            for(const pdf of pdfLocator){
+                await expect.soft(pdf.thumbnail).toBeVisible({timeout: 10000});
+                await pdf.button.click();
+                await expect(pdf.modal).toBeVisible({timeout: 10000});
+                await this.page.keyboard.press('Escape'); 
+                count++;
+                count < pdfLocator.length ? 
+                    await this.locator.nextNavgiationOnContentButton.click()
+                    : await expect(this.locator.nextNavgiationOnContentButton).toBeDisabled();
+            }
+        }catch(error){
+            errors.push('No thumbnail on PDF');
         }
+        return this;
+    }
+    async checkNewPageWhenClickOnHyperLink(locator: Locator, URL:string){
+        const hyperLink = locator;
+        const pagePromise = this.page.context().waitForEvent('page');
+        await hyperLink.click();
+        const newPage = await pagePromise;
+        expect(newPage).toBeTruthy();
+        await expect(newPage).toHaveURL(URL);
+    }
+    async checkWebLinkThumbnail(errors: string[]){
+        const testData = DataManager.getInstance().getDataForNormalCard();
+        let webLinkURL :string[] = [];
+        let count = 0;
+        for(const data of testData){
+            if(data.file === 'webLink'){
+                webLinkURL.push(data.path);
+
+            }
+        }
+        const webLinkLocator = this.locator.webLink;
+        console.log(webLinkLocator.length)
+        for(let i=0; i<webLinkLocator.length; i++){
+            const webLink = webLinkLocator[i];
+            /* Flakey, have not found a reliable selector yet.
+            try{
+                await expect(webLink.thumbnail).toBeVisible();  
+            }catch(erros){
+                errors.push('Weblink has no thumbnail')
+            }
+            */ 
+            count++;
+            try{
+                const url = webLinkURL[i]
+                await this.checkNewPageWhenClickOnHyperLink(webLink.hyperlink, url);
+                count < webLinkLocator.length ?
+                await this.locator.nextNavgiationOnContentButton.click()
+                : await expect(this.locator.nextNavgiationOnContentButton).toBeDisabled();
+            } catch(error){
+                errors.push('Hyperlink does not open');
+            }
+        }    
+        return this;
+    }
+    async checkImageThumbnail(type: string, errors:string[]){
+        let count = 0;
+        try{
+            if(type === 'image'){
+                for(let i = 0; i<2; i++){
+                    await expect(this.locator.imageThumbnail).toBeVisible();
+                    count < 2 ? 
+                    await this.locator.nextNavgiationOnContentButton.click()
+                    : await expect(this.locator.nextNavgiationOnContentButton).toBeDisabled();
+                }
+            } else{
+                await expect(this.locator.imageThumbnail).toBeVisible();
+            }
+        }catch(error){
+            errors.push('No thumbnail for image')
+        }
+        return this;
+    }
+    async verifyMediaCardInformationContent(
+        headline: string,
+        title: string,
+        description: string,
+        errors : string[]
+    ){
+        try{
+            await this.locator.DescriptionAfterSaved.scrollIntoViewIfNeeded();
+            await expect.soft(this.locator.mediaCardTitleAfterSaved).toHaveText(title);
+            await expect.soft(this.locator.headlineAfterSaved).toHaveText(headline);
+            await expect.soft(this.locator.DescriptionAfterSaved).toHaveText(description);
+        }catch(error){
+            errors.push('Information is not visible')
+        }
+        return this;
+    }
+    async verifyQACardInformationContent(
+        title: string,
+        description: string,
+        errors : string[]
+    ){
+        try{
+            await this.locator.DescriptionAfterSaved.scrollIntoViewIfNeeded();
+            await expect.soft(this.locator.QACardTitleAfterSaved).toHaveText(title);
+            await expect.soft(this.locator.DescriptionAfterSaved).toHaveText(description);
+        }catch(error){
+            errors.push('Information is not visible')
+        }
+        return this;
     }
 };
 

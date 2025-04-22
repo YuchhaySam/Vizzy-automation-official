@@ -4,7 +4,7 @@ export const testData: TestData = {
     user: {
         firstName: "Ct",
         lastName: "bot",
-        email: "ct_bot@mailinator.com",
+        email: "ci_bot@mailinator.com",
         password: "Yuchhaysam123@",
         location: "London, UK",
         pronoun: "He / Him",
@@ -112,8 +112,8 @@ export const testData: TestData = {
         startDate: '02/2005',
         endDate: '09/2022',
         description: 'I have nothing to show you all here',
-        answer: 'This is an automation answers',
-        question: `In the next three years, I'd like to…`
+        question: `In the next three years, I'd like to…`,
+        prompt: 'A great read'
     },
     psychAnswer : [
         { page: 1, answerIndex1: 0, answerIndex2: 2, ratingIndex1: 4, ratingIndex2: 7 },

@@ -1,4 +1,4 @@
-import {type Page} from '@playwright/test';
+import {type Page, Locator} from '@playwright/test';
 
 export class myProfileLocator{
     constructor(readonly page: Page){}
@@ -203,7 +203,7 @@ export class myProfileLocator{
     get projectCardTitleAfterSaved(){
         return this.page.locator('span').filter({ hasText: 'Project' }).first();
     }
-    get HeadlineAfterSaved(){
+    get headlineAfterSaved(){
         return this.page.locator('#content').getByText('Vizzy', { exact: true });
     }
     get projectCardDateAfterSaved(){
@@ -230,29 +230,70 @@ export class myProfileLocator{
     get previousNavigationOnContentButton(){
         return this.page.getByRole('button', { name: 'Previous' });
     }
-    get audioThumbnail(){
+    get audioLocator(): {thumbnail: Locator; playButton: Locator}[]{
         return[
-            this.page.locator('.Media_coverAsset__xLOzW').first(),
-            this.page.locator('div:nth-child(2) > div > .Media_media__4HM3f > .Media_coverAsset__xLOzW'),
-            this.page.locator('div:nth-child(3) > div > .Media_media__4HM3f > .Media_coverAsset__xLOzW'),
-            this.page.locator('div:nth-child(4) > div > .Media_media__4HM3f > .Media_coverAsset__xLOzW'),
-            this.page.locator('div:nth-child(5) > div > .Media_media__4HM3f > .Media_coverAsset__xLOzW')
+            {
+                thumbnail: this.page.locator('.Media_coverAsset__xLOzW').first(),
+                playButton: this.page.locator('.Media_iconView__yGPuM').first()
+            },
+            {
+                thumbnail: this.page.locator('div:nth-child(2) > div > .Media_media__4HM3f > .Media_coverAsset__xLOzW'),
+                playButton: this.page.locator('div:nth-child(2) > div > .Media_media__4HM3f > .Media_iconView__yGPuM')
+            },
+            {
+                thumbnail: this.page.locator('div:nth-child(3) > div > .Media_media__4HM3f > .Media_coverAsset__xLOzW'),
+                playButton: this.page.locator('div:nth-child(3) > div > .Media_media__4HM3f > .Media_iconView__yGPuM')
+            },
+            {
+                thumbnail: this.page.locator('div:nth-child(4) > div > .Media_media__4HM3f > .Media_coverAsset__xLOzW'),
+                playButton: this.page.locator('div:nth-child(4) > div > .Media_media__4HM3f > .Media_iconView__yGPuM')
+            },
+            {
+                thumbnail: this.page.locator('div:nth-child(5) > div > .Media_media__4HM3f > .Media_coverAsset__xLOzW'),
+                playButton: this.page.locator('div:nth-child(5) > div > .Media_media__4HM3f > .Media_iconView__yGPuM')
+            },
         ]
     }
-    get pdfThumbNail(){
+    get pdfLocator() : { thumbnail: Locator; button: Locator; modal: Locator}[]{
         return [
-            this.page.getByRole('button', { name: 'button' }).first(),
-            this.page.getByRole('button', { name: 'button' }).nth(2)
+            {
+                thumbnail: this.page.getByRole('button', { name: 'button' }).first(),
+                button: this.page.getByRole('button', { name: 'button' }).nth(1),
+                modal : this.page.locator('canvas')
+            },
+            {
+                thumbnail:  this.page.getByRole('button', { name: 'button' }).nth(2),
+                button: this.page.getByRole('button', { name: 'button' }).nth(3),
+                modal: this.page.locator('canvas')
+            }     
         ]
     }
-    get webLinkThumbnail(){
+    get webLink(): { thumbnail: Locator; hyperlink: Locator;}[]{
         return [
-            this.page.getByRole('button', { name: 'Thumbnail Clicked' }),
-            this.page.getByRole('button', { name: 'Thumbnail Clicked' }),
-            this.page.getByRole('img', { name: 'nytimes.com' })
+            {
+                thumbnail: this.page.locator(`//div[contains(@class,'Media_media__4HM3f Media_square__LuUd8')]/button/img[@alt="A musician stands on stage with a guitar, arms outstretched, in front of a large, cheering crowd."]`),
+                hyperlink: this.page.getByRole('link', { name: 'youtube.com - open in a new' }),
+            },
+            {
+                thumbnail: this.page.locator(`//div[contains(@class,'Media_media__4HM3f Media_square__LuUd8')]/button/img[@alt="A close-up of a person's face with a serious expression, featuring dark hair and a blurred background."]`),
+                hyperlink:  this.page.getByRole('link', { name: 'vimeo.com - open in a new tab' }),
+            },
+            {
+                thumbnail: this.page.locator(`//div[contains(@class,'Media_media__4HM3f Media_square__LuUd8')]/div/img[@alt="nytimes.com"]`),
+                hyperlink: this.page.getByRole('link', { name: 'nytimes.com - open in a new' }),
+            }              
         ]
     }
     get imageThumbnail(){
-        return this.page.getByRole('img', { name: 'cards/' });
+        return this.page.getByRole('img', { name: 'cards/'}).nth(1);
+    }
+    get audioPlayerModal(){
+        return this.page.locator('#modal-lightbox div').nth(1);
+    }
+    get mediaCardTitleAfterSaved(){
+        return this.page.getByText('A great read');
+    }
+    get QACardTitleAfterSaved(){
+        return this.page.getByText('In the next three years, I\'d');
     }
 }

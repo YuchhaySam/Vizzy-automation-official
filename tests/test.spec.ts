@@ -46,8 +46,12 @@ test.describe('free-user', async () => {
     const page = await context.newPage();
 
     await page.goto('https://staging.vizzy.com/');
-    await page.getByRole('img', { name: 'cards/' }).scrollIntoViewIfNeeded();
-    await expect(page.getByRole('img', { name: 'cards/' })).toBeVisible();
+    await page.locator(`//div[contains(@class,'Media_media__4HM3f Media_square__LuUd8')]/button/img[@alt="A musician stands on stage with a guitar, arms outstretched, in front of a large, cheering crowd."]`).scrollIntoViewIfNeeded();
+    await expect(page.locator(`//div[contains(@class,'Media_media__4HM3f Media_square__LuUd8')]/button/img[@alt="A musician stands on stage with a guitar, arms outstretched, in front of a large, cheering crowd."]`)).toBeVisible();
+    await page.waitForTimeout(5000);
+    await page.getByRole('button', { name: 'Next' }).click();
+    await expect(page.locator(`//div[contains(@class,'Media_media__4HM3f Media_square__LuUd8')]/button/img[@alt="A close-up of a person's face with a serious expression, featuring dark hair and a blurred background."]`)).toBeVisible();
+    await page.waitForTimeout(5000);
   });
 
 
