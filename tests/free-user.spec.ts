@@ -561,8 +561,6 @@ test.describe('free-user', async () => {
             .then(myProfilePage => myProfilePage.answerAndRatePsych())
             .then(myProfilePage => myProfilePage.clickOnMyProfileIcon())
             .then(myProfilePage => myProfilePage.verifyPsychCard());
-    })
-    
-    
+    })   
 });
 
