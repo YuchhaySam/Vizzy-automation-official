@@ -3,8 +3,17 @@ import {type Page, Locator} from '@playwright/test';
 export class myProfileLocator{
     constructor(readonly page: Page){}
     
+    get bespokenInput(){
+        return this.page.getByRole('textbox', { name: 'vizzy.com/@' });
+    }
+    get besopkenSaveButton(){
+        return this.page.getByRole('button', { name: 'Next' });
+    }
+    get skipButton(){
+        return this.page.getByRole('button', { name: 'Skip video' });
+    }
     get bioButton(){
-        return this.page.getByRole('button', { name: 'Bio' });
+        return this.page.getByRole('button', { name: 'Add Bio' }).nth(1);
     }
     get locationInputField(){
         return this.page.getByRole('textbox', { name: 'Location(this field is' });
@@ -49,7 +58,7 @@ export class myProfileLocator{
         return this.page.locator(`div[role='textbox'] p`);
     }
     get bioImageButton(){
-        return this.page.getByRole('button', { name: 'Image' });
+        return this.page.getByRole('button', { name: 'Add Bio' }).first();
     }
     get profilePictureUploadField(){
         return this.page.locator('div')
@@ -59,7 +68,7 @@ export class myProfileLocator{
     get covervideoInputField(){
         return this.page.getByRole('textbox', { name: 'Bring your profile to life' });
     }
-    get profileUploadConfirmationModal(){
+    get UploadConfirmationModal(){
         return this.page.getByText('EditResetCancelSave');
     }
     get confirmationSaveButton(){
@@ -182,21 +191,6 @@ export class myProfileLocator{
     get myProfileIcon(){
         return this.page.getByRole('link', { name: 'My profile' });
     }
-    get educationCardContainer(){
-        return this.page.locator(`//div[@class='Card_cardContent__fbo_R Card_adjustSpacing__x578E']//div//div//div[@role='button']`);
-    }
-    get educationCardModal(){
-        return this.page.getByText('Add educationUpload CV BetaGet all eyes on your qualifications.Institution *');
-    }
-    get institutionInputField(){
-        return this.page.getByRole('textbox', { name: 'Institution(this field is' });
-    }
-    get instituationURL(){
-        return this.page.getByRole('textbox', { name: 'Institution URL' });
-    }
-    get qualification(){
-        return this.page.getByRole('textbox', { name: 'Qualification(this field is' });
-    }
     get cardImagEditModal(){
         return this.page.getByText('EditResetFreeWidescreenPortraitClassicSquareCancelSave');
     }
@@ -295,5 +289,80 @@ export class myProfileLocator{
     }
     get QACardTitleAfterSaved(){
         return this.page.getByText('In the next three years, I\'d');
+    }
+    async educationCardContainer(
+        institute: string,
+        qualification: string
+    ) {
+        return this.page.locator('button').filter({ hasText: `${institute}${qualification}` });
+    }
+    get educationCardModal(){
+        return this.page.getByText('Add educationUpload CV BetaGet all eyes on your qualifications.Institution *');
+    }
+    get institutionInputField(){
+        return this.page.locator(`//input[@name='university']`);
+    }
+    get instituationURLInputField(){
+        return this.page.getByRole('textbox', { name: 'Institution URL' });
+    }
+    get qualificationInputField(){
+        return this.page.getByRole('textbox', { name: 'Qualification(this field is' });
+    }
+    get gradeInputField(){
+        return this.page.getByRole('textbox', { name: 'Grade' });
+    }
+    get fieldOfStudyInputField(){
+        return this.page.getByRole('textbox', { name: 'Field of study' });
+    }
+    get logoUploadInputField(){
+        return this.page.locator(`//input[@name='logo']`);
+    }
+    get logoSaveButton(){
+        return this.page.getByRole('button', { name: 'Save' }).nth(2);
+    }
+    get logoUploadedField(){
+        return this.page.locator('#modal-lightbox img');
+    }
+    get workAndEducationSaveButton(){
+        return this.page.getByRole('button', { name: 'Save', exact: true });
+    }
+    get companyNameInputField(){
+        return this.page.getByRole('textbox', { name: 'Company name(this field is' });
+    }
+    get companyURLInputField(){
+        return this.page.getByRole('textbox', { name: 'Company URL' });
+    }
+    get companyTitleInputField(){
+        return this.page.getByRole('textbox', { name: 'Title(this field is required)' });
+    }
+    get companyLocationInputField(){
+        return this.page.getByRole('textbox', { name: 'Location' });
+    }
+    get workCardModal(){
+        return this.page.getByText('Add workUpload CV BetaShowcase your experience and projects in style.Company');
+    }
+    async workCardContainer(title: string, company: string){
+        return this.page.locator('button').filter({ hasText: `${title}${company}` });
+    }
+    get addSkill(){
+        return this.page.getByRole('textbox', { name: 'Add a new skill' });
+    }
+    async skillDropDown(skill:string){
+        return this.page.getByRole("listitem").filter({ hasText: new RegExp(`^${skill}$`) })
+    }
+    async skillChipBeforeSave(skill:string){
+        return this.page.getByText(skill);
+    }
+    get skillCardModal(){
+        return this.page.getByText('SkillsAny software you\'re');
+    }
+    get skillSaveButton(){
+        return this.page.getByRole('button', { name: 'Save' });
+    }
+    get allSkillChipAfterSaved(){
+        return this.page.locator('div.Card_cardContent__fbo_R.Card_adjustSpacing__x578E.SkillsCard_pills__B8ltA span span');
+    }
+    get skillCardTitleAfterSaved(){
+        return this.page.locator('#content').getByText('Skills');
     }
 }

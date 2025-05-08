@@ -1,10 +1,12 @@
 import { TestData} from "./types";
+import dayjs from "dayjs";
+import { faker } from "@faker-js/faker";
 
 export const testData: TestData = {
     user: {
         firstName: "Ct",
         lastName: "bot",
-        email: "ci_bot@mailinator.com",
+        email: "ci_bot_002@mailinator.com",
         password: "Yuchhaysam123@",
         location: "London, UK",
         pronoun: "He / Him",
@@ -95,7 +97,7 @@ export const testData: TestData = {
         {
             file: 'webLink',
             type: 'vimeo-video',
-            path: 'https://vimeo.com/1073443416',
+            path: 'https://vimeo.com/1080312806',
             haveConfirmationModal: false,
             requestURL: null
         },
@@ -113,7 +115,34 @@ export const testData: TestData = {
         endDate: '09/2022',
         description: 'I have nothing to show you all here',
         question: `In the next three years, I'd like to…`,
-        prompt: 'A great read'
+        prompt: 'A great read',
+        
+        companyName: 'Apple',
+        companyURL: 'https://www.apple.com/',
+        title: 'QA',
+        location: 'Siem reap, Cambodia',
+        
+    },
+    informationForEducation:{
+        institute: 'Stanford University',
+        instituteURL: 'https://www.stanford.edu/',
+        qualification: 'Advanced Subsidary Level (AS Level)',
+        grade: '4.0',
+        fieldOfStudy: 'Software Engineering',
+        schoolLogo: '../test-data/media/image/school-logo.jpg',
+        startDate : '05/2001',
+        endDate: '10/2021',
+        description: 'I have only one thing here.'
+    },
+    informationForWork:{
+        company: 'Apple',
+        companyURL: 'https://Apple.com/',
+        location: 'US',
+        title: 'Cleaner',
+        workLogo: '../test-data/media/image/school-logo.jpg',
+        startDate : '04/2001',
+        endDate: '11/2021',
+        description: 'I have nothing here.'
     },
     psychAnswer : [
         { page: 1, answerIndex1: 0, answerIndex2: 2, ratingIndex1: 4, ratingIndex2: 7 },
@@ -126,5 +155,42 @@ export const testData: TestData = {
         { page: 8, answerIndex1: 3, answerIndex2: 1, ratingIndex1: 0, ratingIndex2: 7 },
         { page: 9, answerIndex1: 0, answerIndex2: 2, ratingIndex1: 3, ratingIndex2: 2 },
         { page: 10, answerIndex1: 1, answerIndex2: 3, ratingIndex1: 4, ratingIndex2: 5 },
-    ]
+    ],
+    jobDetail: {
+        copy: `This section outlines the minimum mandatory requirements for creating a job. Please complete the required fields, then click 'Save' and 'Publish'. This information will be visible to candidates.`,
+        title: 'New job (Job detail)',
+        code: (Math.floor(Math.random() * 1000) + 1).toString(),
+        startDate: dayjs().format('DD/MM/YYYY'),
+        endDate: dayjs().add(7, 'day').format('DD/MM/YYYY'),
+        applicationType: 'BOTH',
+        description: 'this is a random job description',
+        requirement: 'this is a random job requirement',
+        employmentType: 'APPRENTICESHIP',
+        workModel: 'Onsite',
+        expectedStartDate: dayjs().add(8, 'day').format('DD/MM/YYYY'),
+        country: 'Cambodia',
+        city : 'Phnom penh',
+        currency: 'EUR',
+        salaryType: 'HOURLY',
+        minSalary: '100',
+        maxSalary: '200'
+    },
+    skillCard: [
+        {     
+            skill: 'Dance'
+        },
+        {
+            skill: 'Data Analysis'
+        }
+    ],
+    signUpUserData: {
+        firstName: faker.person.firstName(),
+        lastName: `_BOT_${faker.person.lastName()}`,
+        email: `BOT_${faker.person.lastName()}@mailinator.com`,
+        password : `${faker.string.fromCharacters("ABCDEFGHIJKLMNOPQRSTUVWXYZ")}
+            ${faker.string.fromCharacters("abcdefghijklmnopqrstuvwxyz")}
+            ${faker.string.fromCharacters("0123456789")}
+            ${faker.string.fromCharacters("!@#$%^&*()")}
+            ${faker.internet.password({ length: 4, memorable: false })}`,
+    } 
 }

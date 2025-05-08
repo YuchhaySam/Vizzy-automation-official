@@ -1,0 +1,243 @@
+{
+  "cookies": [
+    {
+      "name": "CookieConsent",
+      "value": "{stamp:%278gLwg6FyMXqpyRSu1Okhv82yEYxWk3w8cDfJzzxUXcgXHg6ExjkK0g==%27%2Cnecessary:true%2Cpreferences:true%2Cstatistics:true%2Cmarketing:true%2Cmethod:%27explicit%27%2Cver:1%2Cutc:1746696121311%2Cregion:%27kh%27}",
+      "domain": "staging.vizzy.com",
+      "path": "/",
+      "expires": 1778232121,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "vizzy_c_1",
+      "value": "true",
+      "domain": "staging.vizzy.com",
+      "path": "/",
+      "expires": 1781256122.120259,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "vizzy_c_2",
+      "value": "true",
+      "domain": "staging.vizzy.com",
+      "path": "/",
+      "expires": 1781256122.120649,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "vizzy_c_3",
+      "value": "true",
+      "domain": "staging.vizzy.com",
+      "path": "/",
+      "expires": 1781256122.121287,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "vizzy_c_banner",
+      "value": "false",
+      "domain": "staging.vizzy.com",
+      "path": "/",
+      "expires": 1781256122.121674,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "ajs_anonymous_id",
+      "value": "f29f8560-99a1-426f-8794-d5e99ef287e9",
+      "domain": ".vizzy.com",
+      "path": "/",
+      "expires": 1778232126,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "vuid",
+      "value": "pl1600890973.1963291504",
+      "domain": ".vimeo.com",
+      "path": "/",
+      "expires": 1781256122.962616,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "__cf_bm",
+      "value": "QeBBcfEABXDS_Qi7.5EChOx33bGwmfNBGeJ1NGgf6t0-1746696122-1.0.1.1-o41ejyWos4tDRRU2fl73hLxgX93PMjeQtV8LsupLD7WFlBwQNXOnoUxtjaBT.p.D",
+      "domain": ".vimeo.com",
+      "path": "/",
+      "expires": 1746697923.414814,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "_cfuvid",
+      "value": "SLks1qpdbC1QRlg88AYYSY2XqPJQRGHO.7l0BRb5fnY-1746696122894-0.0.1.1-604800000",
+      "domain": ".vimeo.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "vizzy_loggedIn",
+      "value": "true",
+      "domain": "staging.vizzy.com",
+      "path": "/",
+      "expires": 1781256126.951211,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "vizzy_ac_to",
+      "value": "eyJhbGciOiJSUzI1NiIsInR5cGUiOiJKV1QiLCJraWQiOiJtcmstY2YwZDRjZjE2ZGI4NGUwOThiMWFhZTQ1NGZiOGUwYWEifQ.eyJ1c2VySWQiOiJlNmNkYWE5YS1hNjdiLTRhYTYtYmYxNi02OWZjNjYwYWRiZDIiLCJyZWFsbSI6IldFQlNJVEUiLCJhdWRpZW5jZSI6InVzZXJzIiwiZXhwaXJlc0luIjoxNzQ2NzgyNTI0ODA0fQ.Ifgc_0fnp6adFTcyDv4UUvYU7JmSuFLcG2H583zehM-N9KHLdaRgVKuHd8xvKnQ7Dk0ORrORQw8vUdc0BF_vQ5k4c0n6P-MxeDMo7nid-QDYaOE2Uij-RxADwwQ80tQVJX5xJC7BpDFZVbZ7fxuW07DgLUBgA2qEcn2Q7OYAZkckefmD4MtHgQ1jDxvCVkhyvxmMz2G_NTZ_-voyrkMsdcYMikMSjqla_mUXX9DwqZNy7MYQlHnhhKQb1aMtg-5zOy4VMnJsBvBeQu-BNvtwgtsnjs_fm6PArsrpFJlLDkrvdc5h7VUTiSwoT1WmGV0zz7KJpA3RE9yilrUlikZkF4zxo8DJkAElhTY8pOhvQi1lPbHoSt-dxCJMH-QFcD9XryJigKCZDOqCYuWm_n-jeZLUCLwqMa9Udc1XOiOemz3JxKZptNl5hoSIWJ3VmkPmPjgQ7sk7uY6its2zoeO3rCy_UyiCJKvCijf9Dkp56tzvR3InjAH5g_Hoxw46X-JloevXckgeKhz6YLTrfdnLG0NgsKWZyvEXKTQ3zzB7ch3Rmg7tX3IO-2J-IBD7astvLH96lXRu2jKnhrdeU3mGE3T6frW8E2gjuEzlx1ByR8BxiB_3LgTqYQjEiw1v2kQI9gi0L588zagW6PYv6SgpRXyGnIcPnzGXlmkyYQk02-U",
+      "domain": "staging.vizzy.com",
+      "path": "/",
+      "expires": 1781256125.464815,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "vizzy_re_to",
+      "value": "eyJhbGciOiJSUzI1NiIsInR5cGUiOiJKV1QiLCJraWQiOiJtcmstY2YwZDRjZjE2ZGI4NGUwOThiMWFhZTQ1NGZiOGUwYWEifQ.eyJ1c2VySWQiOiJlNmNkYWE5YS1hNjdiLTRhYTYtYmYxNi02OWZjNjYwYWRiZDIiLCJyZWFsbSI6IldFQlNJVEUiLCJhdWRpZW5jZSI6InNlcnZlciIsImV4cGlyZXNJbiI6MTc0OTMyNTkyNDc3MH0.cTUMbO_igrlpeIcmEjl434kVi5pyc9eYO59P1-vFZO7JTwAelX90yNUZZfveNJHlclUAL5BLuJJ_i-yzcOx6ff4RRFEtiVmwgWOqZXNniON-0Jpdyxj3gkrtA_p73zQ3ZZ1CVrTU6f4O6LqAq98K4cAbukrtueGx1-oP1SLac9AjYh2oLx1sfcVXAtwR5ITqkpGBrFTUER-ly10lyb7E9E3dfoAMvxgQuw8QKOOcYwjCQZ4XOJ2t8TpiQ_owlrYRqfdbjF3OLBhUuI5DQ2NUFHRRG2sbi2taFIpeI1xV759JVo43YlAOryX7YU-9QuM99cCOGotoa9ji4l311Dp0rb79gQmMIRs5DYI5PU2t4DIHgRfT--0Khfjw7-ro1MKPy7FfxEb26OCw39pRL31dvNwd_T_n8M4si4-CrL2JFuxd_OFw7m2HLNQgQxSNh162AYWQj1JOhMEw92aZcaX_QGrOCaXPO97X7DAD56Sy167g_byuFIpizfnuY941Zs90QFZYX-i949e0B-77ACWQiSM27bHI_GY6mPR7vktmRmkZx8jwgx6Pn3Rqmy50pQkTYAE9v8Dwy61jNCmOC-_n6ff3LkELYYXROkF_xYj40GmvrRelRBnUHd9snSQ8U9XZ2FAqee4YuWukydBeyNvw5sNt9lG5I99VmhNV4QDwMq0",
+      "domain": "staging.vizzy.com",
+      "path": "/",
+      "expires": 1781256125.465154,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "ajs_user_id",
+      "value": "e6cdaa9a-a67b-4aa6-bf16-69fc660adbd2",
+      "domain": ".vizzy.com",
+      "path": "/",
+      "expires": 1778232126,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "vizzy_pe_ro",
+      "value": "01",
+      "domain": "staging.vizzy.com",
+      "path": "/",
+      "expires": 1781256125.482159,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "vizzy_us_id",
+      "value": "e6cdaa9a-a67b-4aa6-bf16-69fc660adbd2",
+      "domain": "staging.vizzy.com",
+      "path": "/",
+      "expires": 1781256125.482432,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "vizzy_us_em",
+      "value": "bot_nienow%40mailinator.com",
+      "domain": "staging.vizzy.com",
+      "path": "/",
+      "expires": 1781256125.482735,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "vizzy_n_u",
+      "value": "false",
+      "domain": "staging.vizzy.com",
+      "path": "/",
+      "expires": 1781256126.954142,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "__kla_id",
+      "value": "eyJjaWQiOiJPR1ZqWWpaaU16Z3RNRGM1WWkwME1HVTBMV0kxWXpFdFltUXpPV013WldRMllUSXgiLCJsYXN0X2FjdGl2ZV9vbl9zaXRlIjoiMjAyNS0wNS0wOFQwOToyMjowMi4zMTlaIiwiJHJlZmVycmVyIjp7InRzIjoxNzQ2Njk2MTIzLCJ2YWx1ZSI6IiIsImZpcnN0X3BhZ2UiOiJodHRwczovL3N0YWdpbmcudml6enkuY29tLyJ9LCIkbGFzdF9yZWZlcnJlciI6eyJ0cyI6MTc0NjY5NjEyNywidmFsdWUiOiIiLCJmaXJzdF9wYWdlIjoiaHR0cHM6Ly9zdGFnaW5nLnZpenp5LmNvbS8ifSwiJGNvbnNlbnQiOltdLCIkZXhjaGFuZ2VfaWQiOiJCaEVvQ284NHdhaG1scXVxaVZENmR0bjYyNVQ5MHFyYm9MNHUwN0oxY2c5Nmc5SGJEeDFZaWNhRzJPclkzQzA5LlZ4aWsyVyJ9",
+      "domain": "staging.vizzy.com",
+      "path": "/",
+      "expires": 1781256127.480634,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "vizzy_us_ev",
+      "value": "true",
+      "domain": "staging.vizzy.com",
+      "path": "/",
+      "expires": 1781256131.248519,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "vizzy_degr_su",
+      "value": "false",
+      "domain": "staging.vizzy.com",
+      "path": "/",
+      "expires": 1781256132.995381,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    }
+  ],
+  "origins": [
+    {
+      "origin": "https://staging.vizzy.com",
+      "localStorage": [
+        {
+          "name": "__kl_key",
+          "value": "Vxik2W"
+        },
+        {
+          "name": "uw-icon-locales",
+          "value": "{\"version\":\"2025-04-22-09-13-51\",\"en-GB\":{\"widget\":{\"html_lst_title\":\"Translations Menu\",\"html_title\":\"Accessibility Menu\",\"text_icon_small\":\"Accessibility\",\"text_icon_large\":\"Accessibility</br>Menu\",\"new_tab\":\"open in a new tab\",\"broken_links\":{\"target_site_not_available\":\"target website may not be available\"}},\"skip_links\":{\"open_accessibility_nav\":\"Open the Accessible Navigation Menu\",\"open_accessibility_menu\":\"Open the accessibility menu\",\"skip\":\"Skip to main content\",\"enable_visually_impaired\":\"Enable accessibility for low vision\",\"disable_visually_impaired\":\"Disable accessibility for low vision\",\"title\":\"Quick Accessibility Options\"}}}"
+        },
+        {
+          "name": "uw-tunings",
+          "value": "{\"tunings\":{\"widget_language\":null,\"widget_position\":\"5\",\"widget_icon_type\":\"1\",\"widget_icon_size\":\"small\",\"widget_position_mobile\":\"3\",\"widget_no_follow\":true,\"widget_custom_trigger\":\"accessibilityWidget\",\"widget_custom_trigger_enabled\":true,\"widget_lst_button_icon_type\":\"characters\",\"widget_position_nudge_mobile\":\"{\\\"moveX\\\":20,\\\"moveY\\\":5,\\\"xOrientation\\\":\\\"left\\\",\\\"yOrientation\\\":\\\"top\\\"}\",\"widget_color\":\"#020202\",\"widget_layout\":\"full\",\"widget_position_nudge\":\"{\\\"moveX\\\":5,\\\"moveY\\\":10,\\\"xOrientation\\\":\\\"right\\\",\\\"yOrientation\\\":\\\"bottom\\\"}\",\"widget_live_language_enabled\":true,\"widget_lst_button_type\":\"2\",\"widget_lst_button_enabled\":true,\"site_name\":\"staging.vizzy.com\",\"widget_no_report\":true},\"services\":{\"siteId\":3738780,\"userId\":499281,\"noManage\":false,\"noLogo\":false,\"CUSTOM_BRANDING\":{\"is_enabled\":true,\"is_renewable\":true,\"custom_logo_image_path\":\"https://cdn.userway.org/images/2025/02/21/1740128878746_QI318MpDJnjv0Yb5.original.jpg\",\"custom_logo_image_link\":null},\"MODIFY_MENU\":{\"is_enabled\":true,\"is_renewable\":false,\"features_pattern\":\"s9|s3|s18|s6|s4|s14|s13|s25|s7|s2|s12|s11|s17|s19|s21|s23\",\"color_mode\":\"default\",\"dictionary\":true,\"profiles\":true,\"two_columns_layout\":false,\"oversized\":true},\"LIVE_TRANSLATIONS\":{\"is_enabled\":true,\"is_renewable\":false,\"auto_translation\":true,\"autoTranslation\":true,\"overrides\":{},\"noTranslates\":[],\"ignoreWords\":null,\"remainingChars\":420251,\"translationAllowed\":true},\"paidAi\":true},\"remediation\":{},\"remediationV2\":{\"strategy\":\"AUTO\",\"consolidated\":\"https://cdn.userway.org/remediations/consolidated/3738780/j7kpEMYId5lOUFhl.json\",\"version\":0},\"imageAlt\":{\"version\":\"ALTS_V2\",\"resourceHash\":\"leRoxwzJFiDoCj6y\",\"tier\":\"PAID_QUOTA_TIER\",\"quota\":5000,\"usage\":694,\"state\":\"ALTS_ON\",\"missingAlts\":[]},\"widgetCustomLanguages\":[]}"
+        },
+        {
+          "name": "uw-uid",
+          "value": "80e8d764-92bc-430e-bca2-773cf57d2704"
+        },
+        {
+          "name": "uw-tunings-checksum",
+          "value": "1892d1be10d7271f908d1c61d5554c8915988cddf6c653eb8eff755adb605d5a"
+        },
+        {
+          "name": "ajs_anonymous_id",
+          "value": "\"f29f8560-99a1-426f-8794-d5e99ef287e9\""
+        },
+        {
+          "name": "ajs_user_id",
+          "value": "\"e6cdaa9a-a67b-4aa6-bf16-69fc660adbd2\""
+        },
+        {
+          "name": "ajs_user_traits",
+          "value": "{\"email\":\"bot_nienow@mailinator.com\"}"
+        }
+      ]
+    }
+  ]
+}

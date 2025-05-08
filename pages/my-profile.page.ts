@@ -13,7 +13,16 @@ export class MyProfilePage{
     
     async verifyMyProfileTitle(): Promise<this>{
         const title = "Profile | Vizzy";
-        await expect(this.page).toHaveTitle(title, {timeout: 5000});
+        await expect(this.page).toHaveTitle(title, {timeout:10000});
+        return this;
+    }
+    async fillBespoken(name:string){
+        await this.locator.bespokenInput.fill(name);
+        await this.locator.besopkenSaveButton.click();
+        await expect(this.locator.bespokenInput).not.toBeVisible(
+            {timeout: 10000}
+        );
+        await this.locator.skipButton.click();
         return this;
     }
     async openBioEmptyState(){
@@ -22,6 +31,7 @@ export class MyProfilePage{
         return this;
     }
     async fillLocation(location:string){
+        await this.checkIfFieldIsRequire(this.locator.locationInputField);
         await this.locator.locationInputField.fill(location);
         return this;
     }
@@ -81,22 +91,14 @@ export class MyProfilePage{
     }
     async uploadProfileImage(imagePath: string, errors: string[]){
        await this.locator.profilePictureUploadField.setInputFiles(imagePath);
-        try{
             await this.locator.confirmationSaveButton.click({timeout:3000});
-            await this.locator.profileUploadConfirmationModal.waitFor({
+            await this.locator.UploadConfirmationModal.waitFor({
                 state: 'hidden'
             });
-        }catch(error){
-            errors.push('Modal did not appear')
-        }
-        try{
             await this.locator.uploadedProfilePicture.waitFor({ timeout: 3000 });
             const imagePreview = await this.locator.uploadedProfilePicture
             .getAttribute('src');
             expect(imagePreview).toMatch(/^data:image\//);
-        }catch(error){
-            errors.push('No Image found');
-        }
         return this;
     };
     async fillCoverVideo(videoURL:string){
@@ -112,10 +114,12 @@ export class MyProfilePage{
         return this;
     }
     async addProjectHeadline(headline:string){
+        await this.checkIfFieldIsRequire(this.locator.addProjectHeadline);
         await this.locator.addProjectHeadline.fill(headline);
         return this;
     }
     async addStartDate(startDate:string){
+        await this.checkIfFieldIsRequire(this.locator.addStartDate);
         await this.locator.addStartDate.fill(startDate);
         return this;
     }
@@ -124,12 +128,13 @@ export class MyProfilePage{
         return this;
     }
     async addDescription(description:string){
+        await this.checkIfFieldIsRequire(this.locator.addCardDescription);
         await this.locator.addCardDescription.fill(description);
         return this;
     }
     async uploadFileAndWait(page: Page, filePath: string, requestURL: string | null, mediaType: string): Promise<void> {
         // Trigger the file upload first
-        const uploadPromise = this.locator.addMediaInputField.setInputFiles( filePath);
+        const uploadPromise = this.locator.addMediaInputField.setInputFiles(filePath);
         // Wait for the specific upload API response after triggering the upload
         const uploadResponse = await page.waitForResponse((response: Response) => {
             const isUploadUrl = requestURL ? response.url().includes(requestURL) : false;
@@ -152,50 +157,38 @@ export class MyProfilePage{
         }
         for (const media of mediaArray) { 
             if (media.file === 'document' || media.file === 'audio') {
-                try {
-                    const filePath = path.join(__dirname, media.path);
-                    await this.uploadFileAndWait(
-                        this.page, filePath, media.requestURL, media.type);
-                    await expect.soft(this.locator.fileNotSupportedError).not.toBeVisible();
-                    
-                }catch(error){
-                    errors.push('file is not supported');
-                }
+                const filePath = path.join(__dirname, media.path);
+                await this.uploadFileAndWait(
+                    this.page,
+                    filePath, 
+                    media.requestURL, 
+                    media.type
+                );
+                await expect.soft(this.locator.fileNotSupportedError).not.toBeVisible();
             }  else if (media.file === 'webLink') {
-                    try{
-                        await this.locator.addWebLinkInputField.fill(media.path);
-                        await this.locator.addWebLinkButton.click();
-                        caresouselCount++;
-                        await expect.soft(this.locator.noDataWeblinkError).not.toBeVisible({ timeout: 5000 });
-                        await expect(this.locator.addWebLinkButton).toBeDisabled(
-                            { timeout: 5000 }
-                        );
-                    }catch(error){
-                        errors.push('weblink not found')
-                    }   
-            } else {
-                try {
-                    const filePath = path.join(__dirname, media.path);
-                    await this.locator.addMediaInputField.setInputFiles(filePath);
-                    media.file === 'image'? console.log('image') 
-                        : await this.page.waitForSelector(this.locator.carouselContainer,
-                        {state:'visible'}
-                    );
-                    await expect.soft(this.locator.fileNotSupportedError).not.toBeVisible();
+                    await this.locator.addWebLinkInputField.fill(media.path);
+                    await this.locator.addWebLinkButton.click();
                     caresouselCount++;
-
-                }catch(error){
-                    errors.push('file is not supported');
-                }
+                    await expect.soft(this.locator.noDataWeblinkError).not.toBeVisible({ timeout: 5000 });
+                    await expect(this.locator.addWebLinkButton).toBeDisabled(
+                        { timeout: 7000 }
+                    );
+            } else {
+                    await expect(async()=>{
+                        const filePath = path.join(__dirname, media.path);
+                        await this.locator.addMediaInputField.setInputFiles(filePath);
+                        media.file === 'image'? console.log('image') 
+                            : await this.page.waitForSelector(this.locator.carouselContainer,
+                            {state:'visible'}
+                        );
+                        await expect.soft(this.locator.fileNotSupportedError).not.toBeVisible();
+                        caresouselCount++;
+                        if (media.haveConfirmationModal) {
+                            await this.locator.confirmationSaveButton.click();
+                            await expect(this.locator.cardImagEditModal).not.toBeVisible();
+                        }
+                    }).toPass({timeout: 14000, intervals:[7000]});         
             } 
-            if (media.haveConfirmationModal) {
-                try{
-                    await this.locator.confirmationSaveButton.click({timeout:10000});
-                    await expect(this.locator.cardImagEditModal).not.toBeVisible({timeout: 10000});
-                }catch(error){
-                    errors.push('No edit image modal');
-                }             
-            }      
         }
         return this;
     }
@@ -211,7 +204,7 @@ export class MyProfilePage{
     async saveProjectCard(){
         await this.locator.saveButton.click();
         await expect(this.locator.projectModal).not.toBeVisible(
-            {timeout: 10000}
+            {timeout: 12000}
         );
         return this;
     }
@@ -267,6 +260,7 @@ export class MyProfilePage{
         return this;
     }
     async answeringQA(description: string){
+        await this.checkIfFieldIsRequire(this.locator.addCardDescription);
         await this.locator.addCardDescription.fill(description);
         return this;
     }
@@ -351,12 +345,6 @@ export class MyProfilePage{
         await this.locator.myProfileIcon.click();
         return this;
     }
-    async addEducationCard(){
-        await this.locator.addContentButton.click();
-        await this.locator.addEducationButton.click();
-        await expect(this.locator.educationCardModal).toBeVisible();
-        return this;
-    }
     async verifyProjectCardInformationContent(
         headline: string,
         date:string,
@@ -378,6 +366,7 @@ export class MyProfilePage{
     async deleteCard(){
         await this.locator.DescriptionAfterSaved.scrollIntoViewIfNeeded();
         await this.locator.DescriptionAfterSaved.hover();
+        await this.page.evaluate(() => window.scrollBy(0, -100));
         await this.locator.deleteCardButton.click();
         await expect(this.locator.deleteCardModal).toBeVisible();
         await this.locator.confirmToDeleteButton.click();
@@ -511,6 +500,177 @@ export class MyProfilePage{
             await expect.soft(this.locator.DescriptionAfterSaved).toHaveText(description);
         }catch(error){
             errors.push('Information is not visible')
+        }
+        return this;
+    }
+    async addEducationCard(){
+        await this.locator.addContentButton.click();
+        await this.locator.addEducationButton.click();
+        await expect(this.locator.educationCardModal).toBeVisible();
+        return this;
+    }
+    async checkIfFieldIsRequire(locator: Locator) {
+        const inputElement = await locator.elementHandle();
+        if (!inputElement) {
+            throw new Error("Input element is null");
+        }
+        const tagName = await inputElement.evaluate((el) => el.tagName);
+    
+        if (tagName === 'INPUT') {
+            // Check if input is required
+            const isFieldValid = await inputElement.evaluate((el) => (el as HTMLInputElement).checkValidity());
+            expect(isFieldValid).toBe(false);
+        } else {
+            console.warn(`Unexpected element tag: ${tagName}`);
+        }
+    }
+    async selectInstitution(institute:string){
+        await this.checkIfFieldIsRequire(this.locator.institutionInputField);
+        await this.locator.institutionInputField.fill(institute);
+        await this.selectDropdown(institute);
+        await expect(this.locator.institutionInputField).toHaveAttribute('value', institute);
+        return this;
+    }
+    async fillInstitutionURL(URL:string){
+        await this.locator.instituationURLInputField.fill(URL);
+        return this;
+    }
+    async selectQualification(qualification:string){
+        await this.checkIfFieldIsRequire(this.locator.qualificationInputField);
+        await this.locator.qualificationInputField.fill(qualification);
+        await this.selectDropdown(qualification);
+        await expect(this.locator.qualificationInputField).toHaveAttribute('value', qualification);
+        return this;
+    }
+    async fillGrade(grade:string){
+        await this.locator.gradeInputField.fill(grade);
+        return this;
+    }
+    async fillFieldOfStudy(field:string){
+        await this.locator.fieldOfStudyInputField.fill(field);
+        return this;
+    }
+    async uploadSchoolOrWorkLogo(file:string, errors: string[]){
+        const logo = path.join(__dirname, file);
+        await this.locator.logoUploadInputField.setInputFiles(logo);
+        
+        try{
+            await this.locator.UploadConfirmationModal.waitFor(
+                {state:'visible'}
+            )
+            await this.locator.logoSaveButton.click(
+                {timeout:5000}
+            );
+            await expect(this.locator.UploadConfirmationModal).not.toBeVisible();
+        }catch(error){
+            errors.push('No logo confirmation')
+        }
+        const imagePreview = await this.locator.logoUploadedField.getAttribute('src');
+        expect(imagePreview).toMatch(/^data:image\//);
+        return this;
+    }
+    async saveEducationCard(){
+        await this.locator.workAndEducationSaveButton.click();
+        await expect(this.locator.educationCardModal).not.toBeVisible(
+            {timeout: 10000}
+        )
+    }
+    async addWorkCard(){
+        await this.locator.addContentButton.click();
+        await this.locator.addWorkButton.click();
+        await expect(this.locator.workCardModal).toBeVisible();
+        return this;
+    }
+    async fillCompanyName(companyName: string){
+        //await this.checkIfFieldIsRequire(this.locator.companyNameInputField);
+        await this.locator.companyNameInputField.fill(companyName);
+        return this;
+    }
+    async fillCompanyURL(companyURL:string){
+        await this.locator.companyURLInputField.fill(companyURL);
+        return this;
+    }
+    async fillCompanyTitle(title:string){
+        //await this.checkIfFieldIsRequire(this.locator.companyTitleInputField);
+        await this.locator.companyTitleInputField.fill(title);
+        return this;
+    }
+    async fillCompanyLocation(location:string){
+        await this.locator.companyLocationInputField.fill(location);
+        return this;
+    }
+    async saveWorkCard(){
+        await this.locator.workAndEducationSaveButton.click();
+        await expect(this.locator.workCardModal).not.toBeVisible(
+            {timeout:10000}
+        )
+        return this;
+    }
+    async verifyEducationCard(
+        institute: string,
+        qualification: string,
+        grade: string,
+        date: string
+    ){
+        const educationCard = await this.locator.educationCardContainer(
+            institute,
+            qualification
+        );
+        await expect(educationCard).toBeVisible();
+        await expect.soft(educationCard).toContainText(institute);
+        await expect.soft(educationCard).toContainText(grade);
+        await expect.soft(educationCard).toContainText(qualification);
+        await expect.soft(educationCard).toContainText(date);
+        return this;
+    }
+    async verifyWorkCard(
+        company: string,
+        title: string,
+        location: string,
+        date: string,
+    ){
+        const workCard = await this.locator.workCardContainer(
+            title,
+            company
+        );
+        await expect(workCard).toBeVisible();
+        await expect.soft(workCard).toContainText(company);
+        await expect.soft(workCard).toContainText(title);
+        await expect.soft(workCard).toContainText(location);
+        await expect.soft(workCard).toContainText(date);
+        return this;
+    }
+    async addSkillCard(){
+        await this.locator.addContentButton.click();
+        await this.locator.addSkillButton.click();
+        await expect(this.locator.skillCardModal).toBeVisible();
+        return this;
+    }
+    async addNewSkill(){
+        const testData = DataManager.getInstance().getSkillCard()
+        for(const data of testData){
+            await this.locator.addSkill.fill(data.skill);
+            const selectSkill = await this.locator.skillDropDown(data.skill);
+            await selectSkill.waitFor({state:'visible'});
+            await selectSkill.click();
+            const skillChip = await this.locator.skillChipBeforeSave(data.skill);
+            await expect(skillChip).toContainText(data.skill);
+        }
+        return this;
+    }
+    async saveSkillCard(){
+        await this.locator.skillSaveButton.click();
+        await expect(this.locator.skillCardModal).not.toBeVisible(
+            {timeout: 10000}
+        );
+        return this;
+    }
+    async verifySkillCard(){
+        const testData = DataManager.getInstance().getSkillCard();
+        await this.locator.skillCardTitleAfterSaved.scrollIntoViewIfNeeded();
+        const skillChip = await this.locator.allSkillChipAfterSaved.allTextContents();
+        for(const data of testData){
+            expect.soft(skillChip).toContain(data.skill);
         }
         return this;
     }

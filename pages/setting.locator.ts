@@ -8,5 +8,9 @@ export class SettingLocator{
   }
   get settingIcon(){
     return this.page.getByRole('link', { name: 'Settings' });
-}
+  }
+  get createAndManageJob(){
+    return this.page.getByRole('link', { name: 'Create & manage jobs' });
+  }
+
 };

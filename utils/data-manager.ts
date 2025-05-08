@@ -26,4 +26,20 @@ export class DataManager {
     public getPsychAnswer(){
         return this.testData.psychAnswer;
     }
+    public getEducationCard(){
+        return this.testData.informationForEducation;
+    }
+    public getWorkCard(){
+        return this.testData.informationForWork;
+    }
+    public getSkillCard(){
+        return this.testData.skillCard;
+    }
+    public getJobDetail(){
+        return this.testData.jobDetail;
+    }
+    public getSignUpUserData(){
+        return this.testData.signUpUserData;
+    }
+
 }

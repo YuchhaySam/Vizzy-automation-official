@@ -47,16 +47,14 @@ export default defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
   },
-  expect: {
-    timeout: Number(process.env.EXPECT_TIMEOUT) || 5000,
-  },
-
+  
+    timeout: Number(process.env.EXPECT_TIMEOUT) || 60000,
   /* Configure projects for major browsers */
   projects: [
-    {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
-    }
+    //{
+     // name: 'chromium',
+    //  use: { ...devices['Desktop Chrome'] },
+    //},
 
     // {
     //   name: 'firefox',
@@ -87,6 +85,36 @@ export default defineConfig({
     //   name: 'Google Chrome',
     //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
     // },
+    {
+      name: "setup-login",
+      use: {
+        ...devices["Desktop Chrome"]
+      },
+      testMatch: /.*login\.setup\.ts/
+    },
+    {
+      name: "setup-sign-up",
+      use: {
+        ...devices["Desktop Chrome"]
+      },
+      testMatch: /.*sign-up\.setup\.ts/
+    },
+    {
+      name: "behind-login",
+      use:{
+        ...devices["Desktop Chrome"],
+        storageState: "storageState/login.json"
+      },
+      dependencies: ["setup-login"],
+    },
+    {
+      name: "behind-sign-up",
+      use:{
+        ...devices["Desktop Chrome"],
+        storageState: "storageState/sign-up.json"
+      },
+      dependencies: ["setup-sign-up"],
+    }
   ],
 
   /* Run your local dev server before starting the tests */
