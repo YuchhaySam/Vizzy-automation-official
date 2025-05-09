@@ -109,7 +109,6 @@ export class CreateManageJobPage{
       await expect(this.locator.contentSavedMessage).toBeVisible();
       return this;
     }
-    async
 };
 
 
