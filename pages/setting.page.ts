@@ -14,6 +14,10 @@ export class SettingPage{
     await this.locator.retakeTestButton.click();
     return new MyProfilePage(this.page);
   }
+  async clickOnCreateManageJob(){
+    await this.locator.createAndManageJob.click();
+    return this;
+  }
 };
 
 

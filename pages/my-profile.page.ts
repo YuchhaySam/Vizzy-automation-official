@@ -1,8 +1,7 @@
 import { Response , expect, Page, Locator } from "@playwright/test";
 import { myProfileLocator } from "./my-profile.locator";
 import path from "path";
-import { DataManager } from "../utils/data-manager";
-import { DataForNormalCard } from "../test-data/types";
+import { DataForNormalCard, PsychAnswer, SkillCard } from "../test-data/types";
 
 let caresouselCount = 0;
 export class MyProfilePage{
@@ -146,10 +145,13 @@ export class MyProfilePage{
         await uploadPromise;
         caresouselCount++;
       }
-    async uploadMedia(errors: string[], mediaFile: string) {
+    async uploadMedia(
+        errors: string[], 
+        mediaFile: string, 
+        testData: any[]
+    ){ 
         caresouselCount = 0; //reset the number 
         let mediaArray: DataForNormalCard[] = [];
-        const testData = DataManager.getInstance().getDataForNormalCard();
         for (const media of testData) {
             if (media.file === mediaFile) {
                 mediaArray.push(media);
@@ -314,8 +316,7 @@ export class MyProfilePage{
         await expect(this.locator.psychAnswer.first()).toBeVisible(); 
     }
 
-    async answerAndRatePsych(){
-        const psychAnswer = DataManager.getInstance().getPsychAnswer();
+    async answerAndRatePsych(psychAnswer : PsychAnswer[]){
         for (const step of psychAnswer) {
             console.log(`--- Starting Page ${step.page} ---`);
             await this.answerAndRateQuestion(
@@ -421,8 +422,10 @@ export class MyProfilePage{
         expect(newPage).toBeTruthy();
         await expect(newPage).toHaveURL(URL);
     }
-    async checkWebLinkThumbnail(errors: string[]){
-        const testData = DataManager.getInstance().getDataForNormalCard();
+    async checkWebLinkThumbnail(
+        errors: string[], 
+        testData: DataForNormalCard[]
+    ){
         let webLinkURL :string[] = [];
         let count = 0;
         for(const data of testData){
@@ -435,41 +438,30 @@ export class MyProfilePage{
         console.log(webLinkLocator.length)
         for(let i=0; i<webLinkLocator.length; i++){
             const webLink = webLinkLocator[i];
-            /* Flakey, have not found a reliable selector yet.
-            try{
-                await expect(webLink.thumbnail).toBeVisible();  
-            }catch(erros){
-                errors.push('Weblink has no thumbnail')
-            }
-            */ 
+            await expect(webLink.thumbnail).toBeVisible();
             count++;
-            try{
-                const url = webLinkURL[i]
-                await this.checkNewPageWhenClickOnHyperLink(webLink.hyperlink, url);
-                count < webLinkLocator.length ?
-                await this.locator.nextNavgiationOnContentButton.click()
-                : await expect(this.locator.nextNavgiationOnContentButton).toBeDisabled();
-            } catch(error){
-                errors.push('Hyperlink does not open');
-            }
+            const url = webLinkURL[i]
+            await this.checkNewPageWhenClickOnHyperLink(webLink.hyperlink, url);
+            count < webLinkLocator.length ?
+            await this.locator.nextNavgiationOnContentButton.click()
+            : await expect(this.locator.nextNavgiationOnContentButton).toBeDisabled();
         }    
         return this;
     }
     async checkImageThumbnail(type: string, errors:string[]){
         let count = 0;
-        try{
-            if(type === 'image'){
-                for(let i = 0; i<2; i++){
-                    await expect(this.locator.imageThumbnail).toBeVisible();
-                    count < 2 ? 
+        if(type === 'image'){
+                const imageThumbnail = this.locator.imageThumbnail;
+                console.log(imageThumbnail)
+                for(const image of imageThumbnail){
+                    await expect(image.thumbnail).toBeVisible();
+                    count++;
+                    count < imageThumbnail.length ?
                     await this.locator.nextNavgiationOnContentButton.click()
                     : await expect(this.locator.nextNavgiationOnContentButton).toBeDisabled();
                 }
-            } else{
-                await expect(this.locator.imageThumbnail).toBeVisible();
-            }
-        }catch(error){
-            errors.push('No thumbnail for image')
+        }else{
+            await expect(this.locator.gifThumbnail).toBeVisible();
         }
         return this;
     }
@@ -646,8 +638,7 @@ export class MyProfilePage{
         await expect(this.locator.skillCardModal).toBeVisible();
         return this;
     }
-    async addNewSkill(){
-        const testData = DataManager.getInstance().getSkillCard()
+    async addNewSkill(testData: SkillCard[]){
         for(const data of testData){
             await this.locator.addSkill.fill(data.skill);
             const selectSkill = await this.locator.skillDropDown(data.skill);
@@ -665,8 +656,7 @@ export class MyProfilePage{
         );
         return this;
     }
-    async verifySkillCard(){
-        const testData = DataManager.getInstance().getSkillCard();
+    async verifySkillCard(testData: SkillCard[]){
         await this.locator.skillCardTitleAfterSaved.scrollIntoViewIfNeeded();
         const skillChip = await this.locator.allSkillChipAfterSaved.allTextContents();
         for(const data of testData){

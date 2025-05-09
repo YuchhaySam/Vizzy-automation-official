@@ -6,7 +6,7 @@ export const testData: TestData = {
     user: {
         firstName: "Ct",
         lastName: "bot",
-        email: "ci_bot_002@mailinator.com",
+        email: "coffeebiz5@mailinator.com",
         password: "Yuchhaysam123@",
         location: "London, UK",
         pronoun: "He / Him",
@@ -184,7 +184,7 @@ export const testData: TestData = {
         }
     ],
     signUpUserData: {
-        firstName: faker.person.firstName(),
+        firstName: `${faker.person.firstName()}${(Math.floor(Math.random() * 1000) + 1)}`,
         lastName: `_BOT_${faker.person.lastName()}`,
         email: `BOT_${faker.person.lastName()}@mailinator.com`,
         password : `${faker.string.fromCharacters("ABCDEFGHIJKLMNOPQRSTUVWXYZ")}

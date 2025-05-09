@@ -264,22 +264,32 @@ export class myProfileLocator{
     }
     get webLink(): { thumbnail: Locator; hyperlink: Locator;}[]{
         return [
-            {
-                thumbnail: this.page.locator(`//div[contains(@class,'Media_media__4HM3f Media_square__LuUd8')]/button/img[@alt="A musician stands on stage with a guitar, arms outstretched, in front of a large, cheering crowd."]`),
+            {   
+                thumbnail: this.page.getByRole('button', { name: 'button' }).nth(1),
                 hyperlink: this.page.getByRole('link', { name: 'youtube.com - open in a new' }),
             },
             {
-                thumbnail: this.page.locator(`//div[contains(@class,'Media_media__4HM3f Media_square__LuUd8')]/button/img[@alt="A close-up of a person's face with a serious expression, featuring dark hair and a blurred background."]`),
+                thumbnail: this.page.getByRole('button', { name: 'button' }).nth(2),
                 hyperlink:  this.page.getByRole('link', { name: 'vimeo.com - open in a new tab' }),
             },
             {
-                thumbnail: this.page.locator(`//div[contains(@class,'Media_media__4HM3f Media_square__LuUd8')]/div/img[@alt="nytimes.com"]`),
+                thumbnail: this.page.getByRole('img', { name: 'nytimes.com' }),
                 hyperlink: this.page.getByRole('link', { name: 'nytimes.com - open in a new' }),
             }              
         ]
     }
-    get imageThumbnail(){
-        return this.page.getByRole('img', { name: 'cards/'}).nth(1);
+    get imageThumbnail(): {thumbnail: Locator}[]{
+        return [
+            {
+                thumbnail: this.page.getByRole('img', { name: 'cards/'}).first()
+            },
+            {
+                thumbnail: this.page.getByRole('img', { name: 'cards/'}).nth(1)
+            }
+        ]
+    }
+    get gifThumbnail(){
+        return this.page.getByRole('img', { name: 'cards/' });
     }
     get audioPlayerModal(){
         return this.page.locator('#modal-lightbox div').nth(1);

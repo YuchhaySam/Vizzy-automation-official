@@ -2,7 +2,7 @@ import {test as base} from '@playwright/test';
 import { VizzyLandingPage } from './pages/vizzy-landing-page.page';
 import { MyProfilePage } from './pages/my-profile.page';
 import { SettingPage } from './pages/setting.page';
-import { CreateManageJobPage } from './pages/createManageJob.page';
+import { CreateManageJobPage } from './pages/create-manage-job.page';
 import { MailinatorPage } from './pages/mailinator.page';
 
 type MyFixture = {

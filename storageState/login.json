@@ -1,31 +1,11 @@
 {
   "cookies": [
     {
-      "name": "__cf_bm",
-      "value": "Qdt7gaW.KDOXKcp84Ys3Fmq0AzwRRCnilW0hzk8s50c-1746680300-1.0.1.1-is55P.cRerieK9RcWjkoKUM323dLNgII.i7FlM4fSXoM5CF3UFK6Fy0QrCHr3cgy",
-      "domain": ".vimeo.com",
-      "path": "/",
-      "expires": 1746682101.188061,
-      "httpOnly": true,
-      "secure": true,
-      "sameSite": "None"
-    },
-    {
-      "name": "_cfuvid",
-      "value": "1rGrRqS3QrnQZu7b2C49JuZMuLgI9fCCp.I9ve4qhbs-1746680300511-0.0.1.1-604800000",
-      "domain": ".vimeo.com",
-      "path": "/",
-      "expires": -1,
-      "httpOnly": true,
-      "secure": true,
-      "sameSite": "None"
-    },
-    {
       "name": "CookieConsent",
-      "value": "{stamp:%27C2YpBno2COJQiH4ONqvF61mtIBu/uGLE4nDFrv4Vzfzoy4tOL3i7jg==%27%2Cnecessary:true%2Cpreferences:true%2Cstatistics:true%2Cmarketing:true%2Cmethod:%27explicit%27%2Cver:1%2Cutc:1746680302110%2Cregion:%27kh%27}",
+      "value": "{stamp:%27vh/C+oIASlEj8Dy/xBE6Noy0tgwRhE6jrnNqfKmbVQtxgXNVilRUfw==%27%2Cnecessary:true%2Cpreferences:true%2Cstatistics:true%2Cmarketing:true%2Cmethod:%27explicit%27%2Cver:1%2Cutc:1746697248646%2Cregion:%27kh%27}",
       "domain": "staging.vizzy.com",
       "path": "/",
-      "expires": 1778216302,
+      "expires": 1778233248,
       "httpOnly": false,
       "secure": true,
       "sameSite": "Lax"
@@ -35,7 +15,7 @@
       "value": "true",
       "domain": "staging.vizzy.com",
       "path": "/",
-      "expires": 1781240303.232707,
+      "expires": 1781257249.57461,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
@@ -45,7 +25,7 @@
       "value": "true",
       "domain": "staging.vizzy.com",
       "path": "/",
-      "expires": 1781240303.232965,
+      "expires": 1781257249.575039,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
@@ -55,7 +35,7 @@
       "value": "true",
       "domain": "staging.vizzy.com",
       "path": "/",
-      "expires": 1781240303.233345,
+      "expires": 1781257249.57535,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
@@ -65,37 +45,57 @@
       "value": "false",
       "domain": "staging.vizzy.com",
       "path": "/",
-      "expires": 1781240303.233787,
+      "expires": 1781257249.57564,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "ajs_anonymous_id",
+      "value": "6cbea14f-6f8c-4ed3-bdef-243a2798cc78",
+      "domain": ".vizzy.com",
+      "path": "/",
+      "expires": 1778233254,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
     },
     {
       "name": "vuid",
-      "value": "pl2053835653.1036127590",
+      "value": "pl2107901676.316335814",
       "domain": ".vimeo.com",
       "path": "/",
-      "expires": 1781240304.167082,
+      "expires": 1781257250.749016,
       "httpOnly": false,
       "secure": true,
       "sameSite": "None"
     },
     {
-      "name": "ajs_anonymous_id",
-      "value": "a39bbfbe-66d8-4f0c-9d81-0a4b73a00cbc",
-      "domain": ".vizzy.com",
+      "name": "__cf_bm",
+      "value": "ibOtbDUomKfExJHGgz72YvwN1m4Kw7DApknFVcZbg24-1746697250-1.0.1.1-K1.mEr.qB5q1Iunks9zrwIQiu39AkgVPj1iMV9f0ASDQWCtfukG5rWPMAds4dJrs",
+      "domain": ".vimeo.com",
       "path": "/",
-      "expires": 1778216306,
-      "httpOnly": false,
-      "secure": false,
-      "sameSite": "Lax"
+      "expires": 1746699051.26128,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "_cfuvid",
+      "value": "MtqVcUKTiZ9nc6pG3gCb.F_PIg9ICB04BMAPja2Xhpk-1746697250744-0.0.1.1-604800000",
+      "domain": ".vimeo.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
     },
     {
       "name": "vizzy_n_u",
       "value": "false",
       "domain": "staging.vizzy.com",
       "path": "/",
-      "expires": 1781240306.982823,
+      "expires": 1781257254.028583,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
@@ -105,57 +105,67 @@
       "value": "true",
       "domain": "staging.vizzy.com",
       "path": "/",
-      "expires": 1781240306.982599,
+      "expires": 1781257254.02829,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
     },
     {
       "name": "vizzy_ac_to",
-      "value": "eyJhbGciOiJSUzI1NiIsInR5cGUiOiJKV1QiLCJraWQiOiJtcmstY2YwZDRjZjE2ZGI4NGUwOThiMWFhZTQ1NGZiOGUwYWEifQ.eyJ1c2VySWQiOiJmYjdiZTE4Yi00Yjg2LTRhZGUtOTJmMC02NWY5YzE1ZGM5YzEiLCJyZWFsbSI6IldFQlNJVEUiLCJhdWRpZW5jZSI6InVzZXJzIiwiZXhwaXJlc0luIjoxNzQ2NzY2NzA0NDI5fQ.HPpxBGVzA8flSsKJ7c1z3UhrtnfTWd10Z863WlZ1wktxYy-9cFp2ZmJ1V8kbESW_dieE4VxYqaukxUM5soTlRXwQkTA4lOK7QWdZ_vmAyjhNAt_3pK2d5syjzM_cl3ArsVP73zTm8jOA_Z8sHkCrdqCe8Ycq0Z3GpR0jAHz3TENob7bQQqXpj8S0s-ZIdS0Y1FnZHNAZEF3fL3DUf4C8oatmdXbTiwya98LllflMrf145pgVvoAdT7YVCMhJ-RvnQwtOx5rZzu4nLZymmfVv9XynbuA5Huj852t4ikJMm72HRjcmamNdmnz_FxcFqARaiJ0dRRuri6I2pjPs4ljP3LPesQJf5Ydy4ssFRGYJHhIA_ZCYdYmohpdM5R1l_BYKi5-m8vWq_12mftqQ9wf5wwRbyRAbPEZA-xgtX2pB5eD1KKqGwOCJ2noPbCF9LTHi0UGPeBusliyaEwvydTaGyhsXKTntNksPC7GFIrnnJieXS0R8bQlFCI5ZVN_S-1q2vkO95gmcN77MhgatN_-VLjp6oUd8TKm474dCfCKbmdUWdDHF-WptZ7cUE1Kc6I9u038EZ9oDyaOez0_ft2dPsb9PJdjQX_Q-laQbbJMnbJ5grCRcshP4iC7hll-zrRkAvS8pGnFWfrMmUyOHll6GXT1MYLyJZwK6PUQQOLHmBk0",
+      "value": "eyJhbGciOiJSUzI1NiIsInR5cGUiOiJKV1QiLCJraWQiOiJtcmstY2YwZDRjZjE2ZGI4NGUwOThiMWFhZTQ1NGZiOGUwYWEifQ.eyJ1c2VySWQiOiI3MWVhNTcwZi1hY2IzLTRjZDUtYjc2NS0yMTY5MDg4NDljYTEiLCJyZWFsbSI6IldFQlNJVEUiLCJhdWRpZW5jZSI6InVzZXJzIiwiZXhwaXJlc0luIjoxNzQ2NzgzNjUxNzIzfQ.ek15uqEOYQ-EJSro86mZM4ecWR_8eC3y03bljFv4vXi79zTS9VXjfHUDG_XU6KDJaZtvryRHrKFSh7UnLPgAHo4-tktfTKwjF501TfunPWXBHjn0uYk7JV9iPQuL7NsLgCIVfQHO5DlOZKtihv1ZrOkbp7izhZnMoGn28AWy1vwTm71y1nzRJv9GPPMKhWVBEW-K9-uunhlNQMW6mezt3gqTZ2N89Hu_lmiBtlVgBJuki9nJi4JTGTIsD5COs-k4ORA619SK_aPRBsMtOmDYVbeJHHlGCL2OCkrF9N1yG_IxLXC0Yi9ViJpoHxnUjUARrlPObL6kdl1NcxVpgt7to8taT3QBDz53lh5cdWoAADYOzajGs5u8aRj9hNTXVQ8_lp54xZ5bAmoIJINkOvHTskDJVgJdBzrNP4xreKJuL3JPsJ_An5isV_C2KI6lwhREGJcEB7ko69IRDN46Am0-SNNFBmmu51ZKxbiGL3oDVslk2Au4psu95phZBgwxCzM6NSl-JRVNEkQ8bCExli1_cvrB4PuF4Tjavf9fPs0katmbceDkb_8IBpI4eaaV2TtMseihAU-LVk8kR_eFF_jW7Mgo7pexDYM0H7tMJqRkmkYVk8cs7dfBiEiWRGzPXxB09W0KMOHLi-qtKqsSU0lAR6NMso6nfLfWOUfg2PozD18",
       "domain": "staging.vizzy.com",
       "path": "/",
-      "expires": 1781240305.321774,
+      "expires": 1781257252.45838,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
     },
     {
       "name": "vizzy_re_to",
-      "value": "eyJhbGciOiJSUzI1NiIsInR5cGUiOiJKV1QiLCJraWQiOiJtcmstY2YwZDRjZjE2ZGI4NGUwOThiMWFhZTQ1NGZiOGUwYWEifQ.eyJ1c2VySWQiOiJmYjdiZTE4Yi00Yjg2LTRhZGUtOTJmMC02NWY5YzE1ZGM5YzEiLCJyZWFsbSI6IldFQlNJVEUiLCJhdWRpZW5jZSI6InNlcnZlciIsImV4cGlyZXNJbiI6MTc0OTMxMDEwNDQ2NH0.DsLh3Ts9CXBLaeop1RYYAlXYAl3Bwf17ZOlH2x8Xq2XsiIgez4Bchh4pjGPJQSeH_ROjisMZyiJrCk-t1nUJbcRc_ofp5ijwyQsS1vGePQw_v-D5oyqjNMiaEiLwvZ_kFYD59Bik64Q1iBPxZdu1cFDY1sJ-nG5JSpUxIsE5-iVp9S6gltwoXvphNC3gVGcZdGS7_wVRbpNgzUwRqbEyJH5DEMl8Uta11KiaQLLRttBiHPL53kWx-IpFyI8dRDeMBs6JqATzZJeHS_uTdz9J4mxGkVLxCyzyqJQjMarF_GkBJ_02l6qTpPBWgnuq2PZ0BFrX3MG4_S5lH72Ql6hG9sujSg0cRcVd2UPz9PprWdsY7Uwq8Ewm4eF8j_iIBG4VKe8jlLWz2_cQ7AsLCAn0OS0PhBvB3fpkrmERsDXFI-egs03Lt1cvQOKklbUyKDJyYThl2gjaxaZkOwG29UGxoUqM1B-CNv0mGVrrt7jp39nKHCp76agR3NqM_77zyC4qBpvfU46AQjAXl5VFyVQmMZ2uhZ2AswNC8LqlfBYQt3iUEHfHFmmWiWoiTNX7w0efhog2eieVJq9pUoAkbzD4Fbuh30bxylcgvTbu9McjvIm5jiYOMt4B4kn-Ukq8YqcLvEDhBQ6hiC84ZzVrgqGE9dHIVUmrdI5OHaWxTcZhC20",
+      "value": "eyJhbGciOiJSUzI1NiIsInR5cGUiOiJKV1QiLCJraWQiOiJtcmstY2YwZDRjZjE2ZGI4NGUwOThiMWFhZTQ1NGZiOGUwYWEifQ.eyJ1c2VySWQiOiI3MWVhNTcwZi1hY2IzLTRjZDUtYjc2NS0yMTY5MDg4NDljYTEiLCJyZWFsbSI6IldFQlNJVEUiLCJhdWRpZW5jZSI6InNlcnZlciIsImV4cGlyZXNJbiI6MTc0OTMyNzA1MTc1NH0.gVDtKG26szE1DKx0uJUgHKYAT9jfys8ryFTu3sM6YP4eGJx4MjmM358GyhpmwVWKIHZFx9Q64YZKCr35MEjJVx0vzBuiYb579v_IzeECKApgY_mXkfLnHyZR1lpRtkvK9BFZnV8Di8ezFvBnmB7UEV83p4WydAmIs6KQssUQuLRkX3f1ktaPx3NvURM-rSXeS95LfgVc7F6MZB0XeOqeMbYZyhGXod1rhJg1KjFSKwZGFOvGpn9STBD3fPZoZa6_-l5fH4fY5hkvSwVpVfSR1xyitXzgSU9QkFR8vjclnk9TE2mKWC7-vkl1N794FTPYvhG2MX3H87BoOp51x2Owj3AIuDvhJEcVwITfTBOovBGt03xiZaacw0zQkYqL_5airlcx-zHlEv4GXWtIJ8J21Lr5rLW9TzJ0PLA6y7BeUizQjlvzxCJAr2EYwk3jZmWDcdq1maYALOUGeEB1h2AB5zoUnRto7yXFJIkUic6vkwF3IKjGLNw9nmYoRHoM6Mtd8J-9qWp6htrDxdF_ZfOL1Jr_3l15bYiJKXU5t4SdFVZ82lDPEFqou2_vwIScZ8AKuvC7TQrQ2oBAQYFNGVDrHndf-w67ikVC_xtOd1POe7fGLYIO_yHTBAgjOe0kGAjPK-LbJKicj2dvj8tkFfg6YZuL_35G4MKHSdZMyIYP7O4",
       "domain": "staging.vizzy.com",
       "path": "/",
-      "expires": 1781240305.322143,
+      "expires": 1781257252.458708,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "ajs_user_id",
+      "value": "71ea570f-acb3-4cd5-b765-216908849ca1",
+      "domain": ".vizzy.com",
+      "path": "/",
+      "expires": 1778233254,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
     },
     {
       "name": "vizzy_pe_ro",
-      "value": "01",
+      "value": "04",
       "domain": "staging.vizzy.com",
       "path": "/",
-      "expires": 1781240305.329921,
+      "expires": 1781257252.478084,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
     },
     {
       "name": "vizzy_us_id",
-      "value": "fb7be18b-4b86-4ade-92f0-65f9c15dc9c1",
+      "value": "71ea570f-acb3-4cd5-b765-216908849ca1",
       "domain": "staging.vizzy.com",
       "path": "/",
-      "expires": 1781240305.330262,
+      "expires": 1781257252.479555,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
     },
     {
       "name": "vizzy_us_em",
-      "value": "ci_bot_002%40mailinator.com",
+      "value": "coffeebiz5%40mailinator.com",
       "domain": "staging.vizzy.com",
       "path": "/",
-      "expires": 1781240305.330578,
+      "expires": 1781257252.479791,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
@@ -165,17 +175,17 @@
       "value": "true",
       "domain": "staging.vizzy.com",
       "path": "/",
-      "expires": 1781240305.330836,
+      "expires": 1781257252.479991,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
     },
     {
       "name": "__kla_id",
-      "value": "eyJjaWQiOiJaRGN4WVdZelkyTXROVEppWWkwMFpHVTRMVGd5WlRFdFlUUXlNakV6TURFME9EZGgiLCJsYXN0X2FjdGl2ZV9vbl9zaXRlIjoiMjAyNS0wNS0wOFQwNDo1ODoyMy41MzhaIiwiJHJlZmVycmVyIjp7InRzIjoxNzQ2NjgwMzA0LCJ2YWx1ZSI6IiIsImZpcnN0X3BhZ2UiOiJodHRwczovL3N0YWdpbmcudml6enkuY29tLyJ9LCIkbGFzdF9yZWZlcnJlciI6eyJ0cyI6MTc0NjY4MDMwNywidmFsdWUiOiIiLCJmaXJzdF9wYWdlIjoiaHR0cHM6Ly9zdGFnaW5nLnZpenp5LmNvbS8ifSwiJGV4Y2hhbmdlX2lkIjoiZDBZUFpxMEN3a1daMzdJQ0JOT005OW42MjVUOTBxcmJvTDR1MDdKMWNnOTZnOUhiRHgxWWljYUcyT3JZM0MwOS5WeGlrMlcifQ==",
+      "value": "eyJjaWQiOiJOakV4TldJeU9XSXRORFpqTXkwME9HVmhMV0pqT1RJdE5UazRPR0pqTmpVMU56YzUiLCJsYXN0X2FjdGl2ZV9vbl9zaXRlIjoiMjAyNS0wNS0wOFQwOTo0MDo0OS45MDFaIiwiJHJlZmVycmVyIjp7InRzIjoxNzQ2Njk3MjUwLCJ2YWx1ZSI6IiIsImZpcnN0X3BhZ2UiOiJodHRwczovL3N0YWdpbmcudml6enkuY29tLyJ9LCIkbGFzdF9yZWZlcnJlciI6eyJ0cyI6MTc0NjY5NzI1NCwidmFsdWUiOiIiLCJmaXJzdF9wYWdlIjoiaHR0cHM6Ly9zdGFnaW5nLnZpenp5LmNvbS8ifSwiJGV4Y2hhbmdlX2lkIjoiSFRvSWVWX3J2blNqWDBhS1YtenFBZG42MjVUOTBxcmJvTDR1MDdKMWNnOTZnOUhiRHgxWWljYUcyT3JZM0MwOS5WeGlrMlcifQ==",
       "domain": "staging.vizzy.com",
       "path": "/",
-      "expires": 1781240307.255417,
+      "expires": 1781257253.6041,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
@@ -199,7 +209,7 @@
         },
         {
           "name": "uw-uid",
-          "value": "74d364ae-360d-4cc1-9573-cf8ffbc77b8a"
+          "value": "16cc0c38-4ce5-4ecf-bf0b-3881a267130f"
         },
         {
           "name": "uw-tunings-checksum",
@@ -207,11 +217,15 @@
         },
         {
           "name": "ajs_anonymous_id",
-          "value": "\"a39bbfbe-66d8-4f0c-9d81-0a4b73a00cbc\""
+          "value": "\"6cbea14f-6f8c-4ed3-bdef-243a2798cc78\""
         },
         {
           "name": "ajs_user_id",
-          "value": "null"
+          "value": "\"71ea570f-acb3-4cd5-b765-216908849ca1\""
+        },
+        {
+          "name": "ajs_user_traits",
+          "value": "{\"email\":\"coffeebiz5@mailinator.com\"}"
         }
       ]
     }

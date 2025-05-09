@@ -57,12 +57,13 @@ test.describe('Project card', async()=>{
     test('upload project card with audio @project', async({myProfilePage})=>{
         const errors : string[] = [];
         const informationData = DataManager.getInstance().getInformationForCard();
+        const testData = DataManager.getInstance().getDataForNormalCard();
         await myProfilePage.addProjectCard()
         await myProfilePage.addProjectHeadline(informationData.headline)
         await myProfilePage.addStartDate(informationData.startDate)
         await myProfilePage.addEndDate(informationData.endDate)
         await myProfilePage.addDescription(informationData.description)
-        await myProfilePage.uploadMedia(errors, 'audio')
+        await myProfilePage.uploadMedia(errors, 'audio', [...testData])
         await myProfilePage.countCarousel()
         await myProfilePage.saveProjectCard()
         expect.soft(errors).toEqual([]);
@@ -87,12 +88,13 @@ test.describe('Project card', async()=>{
     test('upload project card with image @project', async({myProfilePage})=>{
         const errors : string[] = [];
         const informationData = DataManager.getInstance().getInformationForCard();
+        const testData = DataManager.getInstance().getDataForNormalCard();
         await myProfilePage.addProjectCard()
         await myProfilePage.addProjectHeadline(informationData.headline)
         await myProfilePage.addStartDate(informationData.startDate)
         await myProfilePage.addEndDate(informationData.endDate)
         await myProfilePage.addDescription(informationData.description)
-        await myProfilePage.uploadMedia(errors, 'image')
+        await myProfilePage.uploadMedia(errors, 'image', [...testData])
         await myProfilePage.countCarousel()
         await myProfilePage.saveProjectCard()
         expect.soft(errors).toEqual([]);
@@ -108,7 +110,7 @@ test.describe('Project card', async()=>{
             informationData.description,
             errors
         )
-        //.then(myProfilePage => myProfilePage.checkImageThumbnail('image')) not working
+        await myProfilePage.checkImageThumbnail('image', errors);
         await myProfilePage.deleteCard()
         expect.soft(errors).toEqual([]);
         console.log(errors);
@@ -117,12 +119,13 @@ test.describe('Project card', async()=>{
     test('upload project card with pdf @project', async({myProfilePage})=>{
         const errors : string[] = [];
         const informationData = DataManager.getInstance().getInformationForCard();
+        const testData = DataManager.getInstance().getDataForNormalCard();
         await myProfilePage.addProjectCard()
         await myProfilePage.addProjectHeadline(informationData.headline)
         await myProfilePage.addStartDate(informationData.startDate)
         await myProfilePage.addEndDate(informationData.endDate)
         await myProfilePage.addDescription(informationData.description)
-        await myProfilePage.uploadMedia(errors, 'document')
+        await myProfilePage.uploadMedia(errors, 'document', [...testData])
         await myProfilePage.countCarousel()
         await myProfilePage.saveProjectCard()
         expect.soft(errors).toEqual([]);
@@ -147,12 +150,13 @@ test.describe('Project card', async()=>{
     test('upload project card with webLink @project', async({myProfilePage})=>{
         const errors : string[] = [];
         const informationData = DataManager.getInstance().getInformationForCard();
+        const testData = DataManager.getInstance().getDataForNormalCard();
         await myProfilePage.addProjectCard()
         await myProfilePage.addProjectHeadline(informationData.headline)
         await myProfilePage.addStartDate(informationData.startDate)
         await myProfilePage.addEndDate(informationData.endDate)
         await myProfilePage.addDescription(informationData.description)
-        await myProfilePage.uploadMedia(errors, 'webLink')
+        await myProfilePage.uploadMedia(errors, 'webLink', [...testData])
         await myProfilePage.countCarousel()
         await myProfilePage.saveProjectCard()
         expect.soft(errors).toEqual([]);
@@ -161,6 +165,7 @@ test.describe('Project card', async()=>{
 
     test('verify weblink project card after saved @project', async({myProfilePage})=>{
         const informationData = DataManager.getInstance().getInformationForCard();
+        const testData = DataManager.getInstance().getDataForNormalCard();
         const errors : string[] = [];
         await myProfilePage.verifyProjectCardInformationContent(
             informationData.headline,
@@ -168,7 +173,7 @@ test.describe('Project card', async()=>{
             informationData.description,
             errors
         )
-        await myProfilePage.checkWebLinkThumbnail(errors)
+        await myProfilePage.checkWebLinkThumbnail(errors, [...testData])
         await myProfilePage.deleteCard()
         expect.soft(errors).toEqual([]);
         console.log(errors);
@@ -177,12 +182,13 @@ test.describe('Project card', async()=>{
     test('upload project card with gif @project', async({myProfilePage})=>{
         const errors : string[] = [];
         const informationData = DataManager.getInstance().getInformationForCard();
+        const testData = DataManager.getInstance().getDataForNormalCard();
         await myProfilePage.addProjectCard()
         await myProfilePage.addProjectHeadline(informationData.headline)
         await myProfilePage.addStartDate(informationData.startDate)
         await myProfilePage.addEndDate(informationData.endDate)
         await myProfilePage.addDescription(informationData.description)
-        await myProfilePage.uploadMedia(errors, 'gif')
+        await myProfilePage.uploadMedia(errors, 'gif', [...testData])
         await myProfilePage.countCarousel()
         await myProfilePage.saveProjectCard()
         expect.soft(errors).toEqual([]);
@@ -198,7 +204,7 @@ test.describe('Project card', async()=>{
             informationData.description,
             errors
         )
-        //.then(myProfilePage => myProfilePage.checkImageThumbnail('gif')) error
+        await myProfilePage.checkImageThumbnail('gif', errors);
         await myProfilePage.deleteCard()
         expect.soft(errors).toEqual([]);
         console.log(errors);
@@ -218,12 +224,13 @@ test.describe('Media card', async()=>{
     test('add media card with audio @media', async({myProfilePage})=>{
         const errors : string[] = [];
         const informationData = DataManager.getInstance().getInformationForCard();
+        const testData = DataManager.getInstance().getDataForNormalCard();
         console.log(informationData.prompt)
         await myProfilePage.addMediaCard()
         await myProfilePage.selectVizzyPrompt(informationData.prompt)
         await myProfilePage.addMediaCardHeadline(informationData.headline)
         await myProfilePage.addDescription(informationData.description)
-        await  myProfilePage.uploadMedia(errors, 'audio')
+        await  myProfilePage.uploadMedia(errors, 'audio', [...testData])
         await myProfilePage.countCarousel()
         await myProfilePage.saveMediaCard()
         expect.soft(errors).toEqual([]);
@@ -248,11 +255,12 @@ test.describe('Media card', async()=>{
     test('add media card with image @media', async({myProfilePage})=>{
         const errors : string[] = [];
         const informationData = DataManager.getInstance().getInformationForCard();
+        const testData = DataManager.getInstance().getDataForNormalCard();
         await myProfilePage.addMediaCard()
         await myProfilePage.selectVizzyPrompt(informationData.prompt)
         await myProfilePage.addMediaCardHeadline(informationData.headline)
         await myProfilePage.addDescription(informationData.description)
-        await myProfilePage.uploadMedia(errors, 'image')
+        await myProfilePage.uploadMedia(errors, 'image', [...testData])
         await myProfilePage.countCarousel()
         await myProfilePage.saveMediaCard()
         expect.soft(errors).toEqual([]);
@@ -268,7 +276,7 @@ test.describe('Media card', async()=>{
             informationData.description,
             errors
         )
-        //.then(myProfilePage => myProfilePage.checkImageThumbnail('image', errors))
+        await myProfilePage.checkImageThumbnail('image', errors);
         await myProfilePage.deleteCard()
         expect.soft(errors).toEqual([]);
         console.log(errors);
@@ -277,11 +285,12 @@ test.describe('Media card', async()=>{
     test('add media card with pdf @media', async({myProfilePage})=>{
         const errors : string[] = [];
         const informationData = DataManager.getInstance().getInformationForCard();
+        const testData = DataManager.getInstance().getDataForNormalCard();
         await myProfilePage.addMediaCard()
         await myProfilePage.selectVizzyPrompt(informationData.prompt)
         await myProfilePage.addMediaCardHeadline(informationData.headline)
         await myProfilePage.addDescription(informationData.description)
-        await myProfilePage.uploadMedia(errors, 'document')
+        await myProfilePage.uploadMedia(errors, 'document', [...testData])
         await myProfilePage.countCarousel()
         await myProfilePage.saveMediaCard()
             expect.soft(errors).toEqual([]);
@@ -306,11 +315,12 @@ test.describe('Media card', async()=>{
     test('add media card with webLink @media', async({myProfilePage})=>{
         const errors : string[] = [];
         const informationData = DataManager.getInstance().getInformationForCard();
+        const testData = DataManager.getInstance().getDataForNormalCard();
         await myProfilePage.addMediaCard()
         await myProfilePage.selectVizzyPrompt(informationData.prompt)
         await myProfilePage.addMediaCardHeadline(informationData.headline)
         await myProfilePage.addDescription(informationData.description)
-        await myProfilePage.uploadMedia(errors, 'webLink')
+        await myProfilePage.uploadMedia(errors, 'webLink', [...testData])
         await myProfilePage.countCarousel()
         await myProfilePage.saveMediaCard()
         expect.soft(errors).toEqual([]);
@@ -319,6 +329,7 @@ test.describe('Media card', async()=>{
     
     test('verify webLink media card after saved @media', async({myProfilePage})=>{
         const informationData = DataManager.getInstance().getInformationForCard();
+        const testData = DataManager.getInstance().getDataForNormalCard();
         const errors : string[] = [];
         await myProfilePage.verifyMediaCardInformationContent(
             informationData.headline,
@@ -326,7 +337,7 @@ test.describe('Media card', async()=>{
             informationData.description,
             errors
         )
-        await myProfilePage.checkWebLinkThumbnail(errors)
+        await myProfilePage.checkWebLinkThumbnail(errors, [...testData])
         await myProfilePage.deleteCard()
         expect.soft(errors).toEqual([]);
         console.log(errors);
@@ -335,11 +346,12 @@ test.describe('Media card', async()=>{
     test('add media card with gif @media', async({myProfilePage})=>{
         const errors : string[] = [];
         const informationData = DataManager.getInstance().getInformationForCard();
+        const testData = DataManager.getInstance().getDataForNormalCard();
         await myProfilePage.addMediaCard()
         await myProfilePage.selectVizzyPrompt(informationData.prompt)
         await myProfilePage.addMediaCardHeadline(informationData.headline)
         await myProfilePage.addDescription(informationData.description)
-        await myProfilePage.uploadMedia(errors, 'gif')
+        await myProfilePage.uploadMedia(errors, 'gif', [...testData])
         await myProfilePage.countCarousel()
         await myProfilePage.saveMediaCard()
             expect.soft(errors).toEqual([]);
@@ -355,7 +367,7 @@ test.describe('Media card', async()=>{
             informationData.description,
             errors
         )
-        //.then(myProfilePage => myProfilePage.checkImageThumbnail(errors))
+        await myProfilePage.checkImageThumbnail('gif', errors);
         await myProfilePage.deleteCard();
         expect.soft(errors).toEqual([]);
         console.log(errors);
@@ -375,10 +387,11 @@ test.describe('QA card', async()=>{
     test('add QA card with image @QA', async({myProfilePage})=>{
         const errors : string[] = [];
         const informationData = DataManager.getInstance().getInformationForCard();
+        const testData = DataManager.getInstance().getDataForNormalCard();
         await myProfilePage.addQACard()
         await myProfilePage.selectQAQuestion(informationData.question)
         await myProfilePage.answeringQA(informationData.description)
-        await myProfilePage.uploadMedia(errors, 'image')
+        await myProfilePage.uploadMedia(errors, 'image', [...testData])
         await myProfilePage.countCarousel()
         await myProfilePage.saveQACard()
             expect.soft(errors).toEqual([]);
@@ -393,7 +406,7 @@ test.describe('QA card', async()=>{
             informationData.description,
             errors
         )
-        //.then(myProfilePage => myProfilePage.checkImageThumbnail(errors))
+        await myProfilePage.checkImageThumbnail('image', errors);
         await myProfilePage.deleteCard()
         expect.soft(errors).toEqual([]);
         console.log(errors);
@@ -402,10 +415,11 @@ test.describe('QA card', async()=>{
     test('add QA card with audio @QA', async({myProfilePage})=>{
         const errors : string[] = [];
         const informationData = DataManager.getInstance().getInformationForCard();
+        const testData = DataManager.getInstance().getDataForNormalCard();
         await myProfilePage.addQACard()
         await myProfilePage.selectQAQuestion(informationData.question)
         await myProfilePage.answeringQA(informationData.description)
-        await myProfilePage.uploadMedia(errors, 'audio')
+        await myProfilePage.uploadMedia(errors, 'audio', [...testData])
         await myProfilePage.countCarousel()
         await myProfilePage.saveQACard()
         expect.soft(errors).toEqual([])
@@ -429,10 +443,11 @@ test.describe('QA card', async()=>{
     test('add QA card with pdf @QA', async({myProfilePage})=>{
         const errors : string[] = [];
         const informationData = DataManager.getInstance().getInformationForCard();
+        const testData = DataManager.getInstance().getDataForNormalCard();
         await myProfilePage.addQACard()
         await myProfilePage.selectQAQuestion(informationData.question)
         await myProfilePage.answeringQA(informationData.description)
-        await myProfilePage.uploadMedia(errors, 'document')
+        await myProfilePage.uploadMedia(errors, 'document', [...testData])
         await myProfilePage.countCarousel()
         await myProfilePage.saveQACard()
             expect.soft(errors).toEqual([]);
@@ -456,10 +471,11 @@ test.describe('QA card', async()=>{
     test('add QA card with webLink @QA', async({myProfilePage})=>{
         const errors : string[] = [];
         const informationData = DataManager.getInstance().getInformationForCard();
+        const testData = DataManager.getInstance().getDataForNormalCard();
         await myProfilePage.addQACard()
         await myProfilePage.selectQAQuestion(informationData.question)
         await myProfilePage.answeringQA(informationData.description)
-        await myProfilePage.uploadMedia(errors, 'webLink')
+        await myProfilePage.uploadMedia(errors, 'webLink', [...testData])
         await myProfilePage.countCarousel()
         await myProfilePage.saveQACard()
         expect.soft(errors).toEqual([]);
@@ -468,6 +484,7 @@ test.describe('QA card', async()=>{
     
     test('verify webLink QA card after saved @QA', async({myProfilePage})=>{
         const informationData = DataManager.getInstance().getInformationForCard();
+        const testData = DataManager.getInstance().getDataForNormalCard();
         const errors : string[] = [];
         await myProfilePage
         .verifyQACardInformationContent(
@@ -475,7 +492,7 @@ test.describe('QA card', async()=>{
             informationData.description,
             errors
         )
-        await myProfilePage.checkWebLinkThumbnail(errors)
+        await myProfilePage.checkWebLinkThumbnail(errors, [...testData])
         await myProfilePage.deleteCard()
         expect.soft(errors).toEqual([]);
         console.log(errors);
@@ -484,10 +501,11 @@ test.describe('QA card', async()=>{
     test('add QA card with gif @QA', async({myProfilePage})=>{
         const errors : string[] = [];
         const informationData = DataManager.getInstance().getInformationForCard();
+        const testData = DataManager.getInstance().getDataForNormalCard();
         await myProfilePage.addQACard()
         await myProfilePage.selectQAQuestion(informationData.question)
         await myProfilePage.answeringQA(informationData.description)
-        await myProfilePage.uploadMedia(errors, 'gif')
+        await myProfilePage.uploadMedia(errors, 'gif', [...testData])
         await myProfilePage.countCarousel()
         await myProfilePage.saveQACard()
             expect.soft(errors).toEqual([]);
@@ -502,7 +520,7 @@ test.describe('QA card', async()=>{
             informationData.description,
             errors
         )
-        //.then(myProfilePage => myProfilePage.checkImageThumbnail(errors))
+        await myProfilePage.checkImageThumbnail('gif', errors);
         await myProfilePage.deleteCard()
         expect.soft(errors).toEqual([]);
         console.log(errors);
@@ -520,9 +538,10 @@ test.describe('Psychometric card', async()=>{
     });
 
     test('add Psych card @psych', async({myProfilePage})=>{
+        const psychAnswer = DataManager.getInstance().getPsychAnswer();
         await myProfilePage.addPsychCard()
         await myProfilePage.clickOnTakeTest()
-        await myProfilePage.answerAndRatePsych()
+        await myProfilePage.answerAndRatePsych(psychAnswer)
         await myProfilePage.verifyPsychCard()
     })
     
@@ -530,10 +549,11 @@ test.describe('Psychometric card', async()=>{
         myProfilePage,
         settingPage
     })=>{
+        const psychAnswer = DataManager.getInstance().getPsychAnswer();
         await settingPage.clickOnSettingIcon()
         await settingPage.clickOnRetakeTest()
         await myProfilePage.clickOnTakeTest()
-        await myProfilePage.answerAndRatePsych()
+        await myProfilePage.answerAndRatePsych(psychAnswer)
         await myProfilePage.clickOnMyProfileIcon()
         await myProfilePage.verifyPsychCard()
     })   
@@ -630,13 +650,15 @@ test.describe('Skill card', async()=>{
         await page.close();
     });
 
-    test.only('add skill card', async({myProfilePage})=>{
+    test('add skill card', async({myProfilePage})=>{
+        const testData = DataManager.getInstance().getSkillCard();
         await myProfilePage.addSkillCard()
-        await myProfilePage.addNewSkill();
+        await myProfilePage.addNewSkill(testData);
         await myProfilePage.saveSkillCard();
     })
 
-    test.only('verify skill card', async({myProfilePage})=>{
-        await myProfilePage.verifySkillCard();
+    test('verify skill card', async({myProfilePage})=>{
+        const testData = DataManager.getInstance().getSkillCard();
+        await myProfilePage.verifySkillCard(testData);
     })
 })
